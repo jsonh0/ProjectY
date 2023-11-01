@@ -1,4 +1,6 @@
 require "active_support/core_ext/integer/time"
+require "carrierwave"
+require "carrierwave/orm/activerecord"
 
 Rails.application.configure do
   # Allow server to be hosted on any URL
