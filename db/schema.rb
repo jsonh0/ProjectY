@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_03_220052) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_03_220839) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -20,6 +20,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_03_220052) do
     t.string "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "documents", force: :cascade do |t|
+    t.bigint "case_id_id", null: false
+    t.string "name"
+    t.string "image"
+    t.string "extracted_text"
+    t.bigint "uploader_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["case_id_id"], name: "index_documents_on_case_id_id"
+    t.index ["uploader_id"], name: "index_documents_on_uploader_id"
   end
 
   create_table "foreign_nationals", force: :cascade do |t|
@@ -66,6 +78,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_03_220052) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "documents", "immigration_cases", column: "case_id_id"
+  add_foreign_key "documents", "users", column: "uploader_id"
   add_foreign_key "immigration_cases", "foreign_nationals", column: "foreign_nationals_id"
   add_foreign_key "user_accounts", "accounts"
   add_foreign_key "user_accounts", "users"

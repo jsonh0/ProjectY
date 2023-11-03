@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :documents
   resources :immigration_cases
   resources :foreign_nationals
   resources :accounts

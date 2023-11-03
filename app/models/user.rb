@@ -23,4 +23,5 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  has_many :own_documents, class_name: "Document", foreign_key: "uploader_id"
 end
