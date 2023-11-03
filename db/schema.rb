@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_02_213720) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_03_220052) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -30,6 +30,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_02_213720) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "account_id"
+  end
+
+  create_table "immigration_cases", force: :cascade do |t|
+    t.bigint "foreign_nationals_id", null: false
+    t.integer "case_type"
+    t.integer "status"
+    t.string "receipt_number"
+    t.date "notice_date"
+    t.date "expiration_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["foreign_nationals_id"], name: "index_immigration_cases_on_foreign_nationals_id"
   end
 
   create_table "user_accounts", force: :cascade do |t|
@@ -54,6 +66,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_02_213720) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "immigration_cases", "foreign_nationals", column: "foreign_nationals_id"
   add_foreign_key "user_accounts", "accounts"
   add_foreign_key "user_accounts", "users"
 end

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Immigration cases</h1>
+
+<div id="immigration_cases">
+  <% @immigration_cases.each do |immigration_case| %>
+    <%= render immigration_case %>
+    <p>
+      <%= link_to "Show this immigration case", immigration_case %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New immigration case", new_immigration_case_path %>
