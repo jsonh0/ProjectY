@@ -8,6 +8,8 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1 or /accounts/1.json
   def show
+  
+    
   end
 
   # GET /accounts/new
@@ -22,7 +24,10 @@ class AccountsController < ApplicationController
   # POST /accounts or /accounts.json
   def create
     @account = Account.new(account_params)
-
+      if current_user.admin == true
+        role = 0
+      end
+    @access = Access.create(account: @account, user: current_user, role: role)
     respond_to do |format|
       if @account.save
         format.html { redirect_to account_url(@account), notice: "Account was successfully created." }

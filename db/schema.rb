@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_03_220839) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_04_075815) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
+
+  create_table "access", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "account_id"
+    t.integer "role"
+    t.index ["account_id"], name: "index_access_on_account_id"
+    t.index ["user_id"], name: "index_access_on_user_id"
+  end
 
   create_table "accounts", force: :cascade do |t|
     t.citext "name"
@@ -56,14 +64,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_03_220839) do
     t.index ["foreign_nationals_id"], name: "index_immigration_cases_on_foreign_nationals_id"
   end
 
-  create_table "user_accounts", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "account_id"
-    t.integer "role"
-    t.index ["account_id"], name: "index_user_accounts_on_account_id"
-    t.index ["user_id"], name: "index_user_accounts_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.citext "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -78,9 +78,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_03_220839) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "access", "users"
   add_foreign_key "documents", "immigration_cases", column: "case_id_id"
   add_foreign_key "documents", "users", column: "uploader_id"
   add_foreign_key "immigration_cases", "foreign_nationals", column: "foreign_nationals_id"
-  add_foreign_key "user_accounts", "accounts"
-  add_foreign_key "user_accounts", "users"
 end
