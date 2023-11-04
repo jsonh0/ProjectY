@@ -18,5 +18,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class UserAccount < ApplicationRecord
-  enum role: { admin: 0, foriegn_national: 1, legal: 2 }
+  belongs_to :user
+  belongs_to :account
+  enum role: { admin: 0, foreign_national: 1, legal: 2 }
 end

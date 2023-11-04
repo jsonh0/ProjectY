@@ -22,4 +22,5 @@
 #
 class ImmigrationCase < ApplicationRecord
   belongs_to :ForeignNational
+  has_many :document
 end

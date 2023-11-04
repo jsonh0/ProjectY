@@ -21,4 +21,7 @@ class ForeignNational < ApplicationRecord
     citizen: 4 # New status value
   }
 
+  belongs_to :account
+  has_many :immigraiton_case
+
 end
