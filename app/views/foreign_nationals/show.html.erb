@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @foreign_national %>
+
+<div>
+  <%= link_to "Edit this foreign national", edit_foreign_national_path(@foreign_national) %> |
+  <%= link_to "Back to foreign nationals", foreign_nationals_path %>
+
+  <%= button_to "Destroy this foreign national", @foreign_national, method: :delete %>
+</div>

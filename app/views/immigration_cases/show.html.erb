@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @immigration_case %>
+
+<div>
+  <%= link_to "Edit this immigration case", edit_immigration_case_path(@immigration_case) %> |
+  <%= link_to "Back to immigration cases", immigration_cases_path %>
+
+  <%= button_to "Destroy this immigration case", @immigration_case, method: :delete %>
+</div>
