@@ -28,6 +28,8 @@
   <h5 class="text-white">Admin Content</h5>
   <p class="text-muted">Create Account.</p>
   <p class="text-muted">Add Access.</p>
+   <%= link_to "Create account", new_account_path %>
+
   <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link" %>
 
 
