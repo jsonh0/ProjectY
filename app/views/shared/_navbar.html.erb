@@ -1,7 +1,7 @@
-<nav class="navbar ", style="background-color: #9205C4;">
+<nav class="navbar ", style="background-color: #5907A2;">
 
   <div class="container">
-    <a class="navbar-brand" href="#"  style="color: #FF7102; font-size: 24px;" ><strong>Project Y</strong></a>
+    <a class="navbar-brand" href="<%= root_path %>" style="color: #FF7102; font-size: 24px;" ><strong>Project Y</strong></a>
 
     <!-- search bar -->
     <form class="form-inline my-2 my-lg-0 justify-content-center mx-auto">
@@ -28,5 +28,7 @@
   <h5 class="text-white">Admin Content</h5>
   <p class="text-muted">Create Account.</p>
   <p class="text-muted">Add Access.</p>
+  <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link" %>
+
 
 </div>
