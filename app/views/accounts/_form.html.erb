@@ -22,12 +22,20 @@
   </div>
   <hr>
 
+  <% if current_user != nil %>
+    <% if current_user.admin == true %>
+      
+    
+  
   <%= form.fields_for :access do |access_form| %>
     <%= access_form.label :role, "Role" %>
     <%= access_form.select :role, Access.roles.keys %>
   <% end %>
-
+<% end %>
+<% end %>
   <div style= "padding-top: 10px">
-    <%= form.submit %>
+    <%= form.submit "Save" %>
   </div>
+
+
 <% end %>

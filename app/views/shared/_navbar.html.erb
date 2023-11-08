@@ -25,7 +25,14 @@
 
 <div class="collapse-vertical collapse"  id="navbarToggleExternalContent" style="text-align: right; padding: 10px; background-color: #9205C4;">
   <%if current_user != nil %>
-    <p class="text-muted">Add Access. (not working)</p>
+  
+  <%= link_to "Edit Account", edit_user_registration_path , class: "nav-link"%>
+
+
+
+
+
+
 
     <%if current_user.admin == true%>
       <%= link_to "Create account", new_account_path, class: "nav-link" %>
