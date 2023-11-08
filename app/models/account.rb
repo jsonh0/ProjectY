@@ -14,4 +14,8 @@ class Account < ApplicationRecord
   has_many :accesses
   has_many :users, through: :accesses
   has_many :foriegn_nationals
+  accepts_nested_attributes_for :accesses
+  def account_params
+    params.require(:account).permit(:name, :notes, access_attributes: [:role])
+  end
 end
