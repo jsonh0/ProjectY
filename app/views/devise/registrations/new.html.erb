@@ -17,7 +17,6 @@
 
           <div class="card-body">
             <form class="mb-3" id="new_user" novalidate="novalidate" action="/users" accept-charset="UTF-8" method="post">
-              <input type="hidden" name="authenticity_token" value="YVazayRNKTKs1yLI/BlpEzO8Xo54BKM2p64OZwZ1rHJOgewUjOIYedRzlglBOc6pS4EDRVARKk03bPuFIWCIPw==">
 
               <div class="form-group">
                 <%= f.input :username,
@@ -45,10 +44,14 @@
              
                   input_html: { autocomplete: "new-password", class: "form-control" } %>
               </div>
+              <div class="form-group">
+                <%= f.label :admin, "Admin" %>
+                <%= f.check_box :admin %>
+              </div>
 
               <div class="form-actions", style="padding-top: 10px">
-  <%= f.button :submit, "Sign up", class: "btn btn-primary" %>
-</div>
+                <%= f.button :submit, "Sign up", class: "btn btn-primary" %>
+              </div>
 
               <hr>
 
