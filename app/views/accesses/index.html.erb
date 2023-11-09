@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Accesses</h1>
+
+<div id="accesses">
+  <% @accesses.each do |access| %>
+    <%= render access %>
+    <p>
+      <%= link_to "Show this access", access %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New access", new_access_path %>
