@@ -8,10 +8,32 @@
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
+
     </div>
   <% end %>
 
+  <div style= "padding-bottom: 10px; " >
+    <%= form.label :user_id, "Select User" %>
+    <%= form.collection_select :user_id, User.all, :id, :username, prompt: "Select a User"%>
+  </div>
+
+  <div style= "padding-bottom: 10px; " >
+
+    <%= form.label :account_id, "Select Account" %>
+    <%= form.collection_select :acocunt_id, Account.all, :id, :name, prompt: "Select an Account" %>
+  </div>
+
+
+
+
+
+  <div style= "padding-bottom: 10px; " >
+
+    <%= form.label :user_access_role, "Select Role" %>
+  <%= form.collection_select :user_access_role, Access.roles.keys, :to_s, :humanize, { include_blank: "Select a Role" } %>
+  </div>
   <div>
     <%= form.submit %>
   </div>
+
 <% end %>

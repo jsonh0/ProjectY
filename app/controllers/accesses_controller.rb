@@ -3,7 +3,10 @@ class AccessesController < ApplicationController
 
   # GET /accesses or /accesses.json
   def index
-    @accesses = Access.all
+
+
+    @q = Access.ransack(params[:q])
+    @accesses = @q.result
   end
 
   # GET /accesses/1 or /accesses/1.json
@@ -18,7 +21,9 @@ class AccessesController < ApplicationController
   # GET /accesses/1/edit
   def edit
   end
-
+  def access_params
+    params.require(:access).permit(:role, :account_id, :user_id) # Permit any other attributes as needed
+  end
   # POST /accesses or /accesses.json
   def create
     @access = Access.new(access_params)
@@ -65,6 +70,6 @@ class AccessesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def access_params
-      params.fetch(:access, {})
+      params.require(:access).permit(:user, :account, :role)
     end
 end
