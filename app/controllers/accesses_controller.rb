@@ -70,6 +70,6 @@ class AccessesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def access_params
-      params.require(:access).permit(:user, :account, :role)
+      params.require(:access).permit(:user_id, :account_id, :role)
     end
 end
