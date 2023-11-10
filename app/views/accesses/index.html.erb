@@ -1,14 +1,13 @@
 <p style="color: green"><%= notice %></p>
+<div class="container">
+  <h1>Accesses</h1>
 
-<h1>Accesses</h1>
+  <div id="accesses" style= "margin: 20px;  display: flex;
+  justify-content: space-around;">
+    <% @accesses.each do |access| %>
+      <%= render access , local_variable: { hide_specific_part: false }%>
 
-<div id="accesses">
-  <% @accesses.each do |access| %>
-    <%= render access %>
-    <p>
-      <%= link_to "Show this access", access %>
-    </p>
-  <% end %>
+    <% end %>
+  </div>
+
 </div>
-
-

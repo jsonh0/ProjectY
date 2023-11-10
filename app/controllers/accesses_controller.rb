@@ -3,10 +3,17 @@ class AccessesController < ApplicationController
 
   # GET /accesses or /accesses.json
   def index
-
-
     @q = Access.ransack(params[:q])
-    @accesses = @q.result
+
+    # Check if search parameters are present
+    if params[:q].present?
+      # Apply the search if parameters are present
+      @accesses = @q.result(distinct: true)
+    else
+      # If no search parameters, display all records or handle as needed
+      @accesses = Access.all
+    end
+  
   end
 
   # GET /accesses/1 or /accesses/1.json
@@ -21,9 +28,11 @@ class AccessesController < ApplicationController
   # GET /accesses/1/edit
   def edit
   end
+
   def access_params
     params.require(:access).permit(:role, :account_id, :user_id) # Permit any other attributes as needed
   end
+
   # POST /accesses or /accesses.json
   def create
     @access = Access.new(access_params)
@@ -63,13 +72,16 @@ class AccessesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_access
-      @access = Access.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def access_params
-      params.require(:access).permit(:user_id, :account_id, :role)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_access
+    @access = Access.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+
+  def access_params
+    params.require(:access).permit(:user_id, :account_id, :role, :other_permissible_attribute)
+  end
+
 end

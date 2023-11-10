@@ -24,5 +24,6 @@ class Access < ApplicationRecord
 
   enum role: { admin: 0, foreign_national: 1, legal: 2 }
 
-  
+
+
 end

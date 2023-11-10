@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @access %>
+<%= render @access , local_variable: { hide_specific_part: true }%>
 
 <div>
   <%= link_to "Edit this access", edit_access_path(@access) %> |

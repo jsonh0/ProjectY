@@ -26,4 +26,6 @@ class User < ApplicationRecord
   has_many :documents, class_name: "Document", foreign_key: "uploader_id"
   has_many :accesses
   has_many :accounts, through: :access
+
+
 end

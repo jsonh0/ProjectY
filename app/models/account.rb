@@ -18,4 +18,6 @@ class Account < ApplicationRecord
   def account_params
     params.require(:account).permit(:name, :notes, access_attributes: [:role])
   end
+
+
 end
