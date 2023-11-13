@@ -6,10 +6,10 @@
     </svg>
   </button>
   <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
-    <li><a class="dropdown-item" href="#">New FN</a></li>
-    <li><a class="dropdown-item" href="#">Settings</a></li>
-    <li><a class="dropdown-item" href="#">Profile</a></li>
+    <li><%= link_to "Add Foreign National", new_foreign_national_path(account_id: @account.id), class: "dropdown-item" %></li>
+    <li><%= link_to "Edit account", edit_account_path(@account), class: "dropdown-item" %></li>
     <li><hr class="dropdown-divider"></li>
-    <li><a class="dropdown-item" href="#">Sign out</a></li>
+    <li><%= button_to "Destroy this account", @account, method: :delete,  class: "dropdown-item", style: "color: #FD0404" %></li>
+   
   </ul>
 </div>

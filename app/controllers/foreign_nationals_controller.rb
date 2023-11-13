@@ -13,6 +13,8 @@ class ForeignNationalsController < ApplicationController
   # GET /foreign_nationals/new
   def new
     @foreign_national = ForeignNational.new
+    @account_id = params[:param_name]
+    
   end
 
   # GET /foreign_nationals/1/edit
@@ -21,6 +23,7 @@ class ForeignNationalsController < ApplicationController
 
   # POST /foreign_nationals or /foreign_nationals.json
   def create
+    puts "Params: #{params.inspect}"
     @foreign_national = ForeignNational.new(foreign_national_params)
 
     respond_to do |format|
@@ -65,6 +68,6 @@ class ForeignNationalsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def foreign_national_params
-      params.require(:foreign_national).permit(:name, :status, :birthday, :address)
+      params.require(:foreign_national).permit(:name, :status, :birthday, :address, :account_id)
     end
 end

@@ -17,8 +17,10 @@
   </div>
 
   <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.number_field :status %>
+
+  <%= form.label :status, "Select status" %>
+  <%= form.collection_select :status, ForeignNational.statuses.keys, :to_s, :humanize, { include_blank: "Select a Status" } %>
+
   </div>
 
   <div>
@@ -29,6 +31,11 @@
   <div>
     <%= form.label :address, style: "display: block" %>
     <%= form.text_field :address %>
+  </div>
+  <div>
+      <%= form.hidden_field :account_id, value: params[:account_id] %>
+
+
   </div>
 
   <div>
