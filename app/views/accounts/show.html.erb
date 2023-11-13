@@ -5,14 +5,13 @@
 <p style="color: green"><%= notice %></p>
 
 <div class="col-md-10 offset-md-1">
+
   <%= render @account %>
 
-  <div>
-    |
-    <%= link_to "Back to accounts", accounts_path %>
+  <% @account.foreign_nationals.each do |fn| %>
 
-    
-  </div>
+    <%= render "account_fns", fn: fn %>
+  <% end %>
 </div>
 
 
