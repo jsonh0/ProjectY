@@ -17,7 +17,8 @@
 
   <body >
     <%= render partial: "shared/navbar" %>
-    <div class="container; pt-2">
+    
+    <div class="container: pt-2">
 
       <% if notice.present? %>
         <%= render partial: "shared/flash", locals: { message: notice, css_class: "success" } %>
@@ -30,9 +31,10 @@
 
 
 
-      <%= yield %>
+     
     
     </div>
+     <%= yield %>
     
   </body>
   
