@@ -1,6 +1,7 @@
 <div class="container">
 <h1>New access</h1>
 
+<% if current_user.admin? %>
 
 <%= render "form", access: @access %>
 
@@ -10,3 +11,7 @@
   <%= link_to "Back to accesses", accesses_path %>
 </div>
 </div>
+
+<% else %>
+  <a href="/">Not Authorized, click to go back.</a>
+<% end %>

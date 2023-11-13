@@ -25,7 +25,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :documents, class_name: "Document", foreign_key: "uploader_id"
   has_many :accesses
-  has_many :accounts, through: :access
+  has_many :accounts, through: :accesses
 
 
 end

@@ -3,9 +3,13 @@ class AccountsController < ApplicationController
 
   # GET /accounts or /accounts.json
   def index
-
-    @q = Account.ransack(params[:q])
-    @accounts = @q.result
+    @accounts = if current_user.admin?
+      @q = Account.ransack(params[:q])
+      @accounts = @q.result
+    else
+      current_user.accounts
+    end
+    
   end
 
   # GET /accounts/1 or /accounts/1.json
@@ -17,6 +21,7 @@ class AccountsController < ApplicationController
   # GET /accounts/new
   def new
     @account = Account.new
+
   end
 
   # GET /accounts/1/edit
