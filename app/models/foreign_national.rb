@@ -14,11 +14,11 @@
 class ForeignNational < ApplicationRecord
 
   enum status: {
-    outside_US: 0,
-    visa: 1,
-    pending: 2,
-    greencard: 3,
-    citizen: 4 # New status value
+    Outside_US: 0,
+    Visa: 1,
+    Pending: 2,
+    Greencard: 3,
+    Citizen: 4 # New status value
   }
 
   belongs_to :account
