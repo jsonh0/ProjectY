@@ -25,7 +25,7 @@ class ForeignNationalsController < ApplicationController
   def create
     puts "Params: #{params.inspect}"
     @foreign_national = ForeignNational.new(foreign_national_params)
-
+    @account_id = params[:account_id]
     respond_to do |format|
       if @foreign_national.save
         format.html { redirect_to foreign_national_url(@foreign_national), notice: "Foreign national was successfully created." }

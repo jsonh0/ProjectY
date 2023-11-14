@@ -7,7 +7,7 @@
   </button>
   <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
 
-    <li><%= link_to "Add Foreign National", "#", class: "dropdown-item", data: { toggle: "modal", target: "#foreignNationalModal",  value: params[:account_id]  } %></li>
+    <li><%= link_to "Add Foreign National", "#", class: "dropdown-item", data: { toggle: "modal", target: "#foreignNationalModal",  account_id: params[:account_id]  } %></li>
    
     <li><%= link_to "Edit account", edit_account_path(@account), class: "dropdown-item" %></li>
     <li><hr class="dropdown-divider"></li>

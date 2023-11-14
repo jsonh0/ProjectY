@@ -9,7 +9,8 @@
         </button>
       </div>
       <div class="modal-body">
-        <%= render 'foreign_nationals/form', foreign_national: ForeignNational.new%>
+       <%= render 'foreign_nationals/form', foreign_national: ForeignNational.new, account_id: params[:account_id] %>
+       
       </div>
     </div>
   </div>
