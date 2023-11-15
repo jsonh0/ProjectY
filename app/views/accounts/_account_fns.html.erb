@@ -11,12 +11,18 @@
       <p>Item A</p>
       <p>Item B</p>
       <p>Item C</p>
-      <%= link_to "#", data: { toggle: "modal", target: "#ImmigrationCaseModal",  foreign_nationals_id: fn.id  },  class: "btn btn-light d-flex justify-content-between align-items-baseline ms-auto", style: "width: 40px;" do %>
+
+      <%= link_to "#", 
+              data: { toggle: "modal", target: "#ImmigrationCaseModal", foreign_nationals_id: fn.id }, 
+              class: "btn btn-light d-flex justify-content-between align-items-baseline ms-auto", 
+              style: "width: 40px; text-decoration: none; color: #000;",
+              onmouseover: "this.style.backgroundColor='#9205C4';",
+              onmouseout: "this.style.backgroundColor='transparent';" do %>
         <i class="fas fa-plus-square"></i>
       <% end %>
 
     </blockquote>
   </div>
 </div>
- 
+
 <%= render "accounts/account_new_case", fn: fn %>
