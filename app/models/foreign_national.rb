@@ -12,7 +12,8 @@
 #  account_id :integer
 #
 class ForeignNational < ApplicationRecord
-
+  validates :name, presence: true
+  
   enum status: {
     Outside_US: 0,
     Visa: 1,
@@ -22,6 +23,6 @@ class ForeignNational < ApplicationRecord
   }
 
   belongs_to :account
-  has_many :immigraiton_case
+  has_many :immigration_case
 
 end

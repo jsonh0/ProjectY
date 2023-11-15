@@ -16,6 +16,7 @@ class AccountsController < ApplicationController
   def show
     @account = Account.find(params[:id])
     @account_id = @account.id
+
   end
 
   # GET /accounts/new
@@ -69,6 +70,8 @@ class AccountsController < ApplicationController
     end
   end
 
+ 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_account
@@ -80,4 +83,7 @@ class AccountsController < ApplicationController
       params.require(:account).permit(:name, :notes, :username_cont)
     end
 
+    def pass_fn_id(id)
+      @fn_id = id
+    end
 end

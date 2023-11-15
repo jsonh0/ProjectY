@@ -13,6 +13,10 @@ class ImmigrationCasesController < ApplicationController
   # GET /immigration_cases/new
   def new
     @immigration_case = ImmigrationCase.new
+
+
+
+
   end
 
   # GET /immigration_cases/1/edit
@@ -21,7 +25,10 @@ class ImmigrationCasesController < ApplicationController
 
   # POST /immigration_cases or /immigration_cases.json
   def create
+ 
     @immigration_case = ImmigrationCase.new(immigration_case_params)
+  
+debugger
 
     respond_to do |format|
       if @immigration_case.save
@@ -65,6 +72,6 @@ class ImmigrationCasesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def immigration_case_params
-      params.require(:immigration_case).permit(:ForeignNational_id, :case_type, :status, :ReceiptNumber, :NoticeDate, :ExpirationDate)
+      params.require(:immigration_case).permit(:ForeignNational_id, :case_type, :status, :ReceiptNumber, :NoticeDate, :ExpirationDate, :foreign_nationals_id)
     end
 end

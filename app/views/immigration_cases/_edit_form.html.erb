@@ -1,0 +1,47 @@
+<%= form_with(model: immigration_case) do |form| %>
+  <% if immigration_case.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(immigration_case.errors.count, "error") %> prohibited this immigration_case from being saved:</h2>
+
+      <ul>
+        <% immigration_case.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+     <%= form.hidden_field :foreign_nationals_id, value: @foreign_nationals_id %>
+     <h5><%=@foreign_nationals_id%></h5>
+  </div>
+
+  <div>
+    <%= form.label :case_type, style: "display: block" %>
+    <%= form.number_field :case_type %>
+  </div>
+
+  <div>
+    <%= form.label :status, style: "display: block" %>
+    <%= form.number_field :status %>
+  </div>
+
+  <div>
+    <%= form.label :ReceiptNumber, style: "display: block" %>
+    <%= form.text_field :ReceiptNumber %>
+  </div>
+
+  <div>
+    <%= form.label :NoticeDate, style: "display: block" %>
+    <%= form.date_field :NoticeDate %>
+  </div>
+
+  <div>
+    <%= form.label :ExpirationDate, style: "display: block" %>
+    <%= form.date_field :ExpirationDate %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

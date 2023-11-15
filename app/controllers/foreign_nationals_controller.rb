@@ -13,7 +13,8 @@ class ForeignNationalsController < ApplicationController
   # GET /foreign_nationals/new
   def new
     @foreign_national = ForeignNational.new
-    @account_id = params[:param_name]
+    @account_id = params[:account_id]
+
     
   end
 
@@ -30,9 +31,11 @@ class ForeignNationalsController < ApplicationController
       if @foreign_national.save
         format.html { redirect_to foreign_national_url(@foreign_national), notice: "Foreign national was successfully created." }
         format.json { render :show, status: :created, location: @foreign_national }
+        redirect_to account_path(@foreign_national.account_id)
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @foreign_national.errors, status: :unprocessable_entity }
+        redirect_to account_path(@account_id)
       end
     end
   end

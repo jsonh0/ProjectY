@@ -21,6 +21,14 @@
 #  fk_rails_...  (foreign_nationals_id => foreign_nationals.id)
 #
 class ImmigrationCase < ApplicationRecord
-  belongs_to :ForeignNational
+  #belongs_to :ForeignNational, foreign_key: "foreign_national_id"
   has_many :document
+
+  enum status: {
+    I: 0,
+    Visa: 1,
+    Pending: 2,
+    Greencard: 3,
+    Citizen: 4 # New status value
+  }
 end
