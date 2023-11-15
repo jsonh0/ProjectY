@@ -1,5 +1,3 @@
-
-
 <div class="d-flex">
 <%= render "account_side_button"%>
 <p style="color: green"><%= notice %></p>
@@ -11,8 +9,8 @@
   <% @account.foreign_nationals.each do |fn| %>
 
     <%= render "account_fns", fn: fn %>
+
   <% end %>
 </div>
-
-
+<%= render "account_side_button"%>
 </div>

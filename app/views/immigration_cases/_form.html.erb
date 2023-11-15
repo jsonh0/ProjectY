@@ -12,8 +12,8 @@
   <% end %>
 
   <div>
-    <%= form.label :ForeignNational_id, style: "display: block" %>
-    <%= form.text_field :ForeignNational_id %>
+     <%= form.hidden_field :foreign_nationals_id, value: @foreign_nationals_id %>
+     <h5><%=@foreign_nationals_id%></h5>
   </div>
 
   <div>
