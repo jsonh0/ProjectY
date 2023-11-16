@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="ImmigrationCaseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="ImmigrationCaseModal<%=fn%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -9,8 +9,9 @@
         </button>
       </div>
       <div class="modal-body">
-        <%=fn.id%>
-        <%= render 'immigration_cases/form', immigration_case: ImmigrationCase.new, foreign_nationals_id: fn.id%>
+      
+    
+        <%= render 'immigration_cases/form', immigration_case: ImmigrationCase.new, foreign_nationals_id: fn%>
         
       </div>
     </div>
