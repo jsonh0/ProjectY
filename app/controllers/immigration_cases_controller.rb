@@ -28,7 +28,7 @@ class ImmigrationCasesController < ApplicationController
  
     @immigration_case = ImmigrationCase.new(immigration_case_params)
   
-debugger
+
 
     respond_to do |format|
       if @immigration_case.save
