@@ -29,9 +29,9 @@ class ForeignNationalsController < ApplicationController
     @account_id = params[:account_id]
     respond_to do |format|
       if @foreign_national.save
-        format.html { redirect_to foreign_national_url(@foreign_national), notice: "Foreign national was successfully created." }
+        format.html { redirect_to account_path(@foreign_national.account_id), notice: "Foreign national was successfully created." }
         format.json { render :show, status: :created, location: @foreign_national }
-        redirect_to account_path(@foreign_national.account_id)
+        
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @foreign_national.errors, status: :unprocessable_entity }

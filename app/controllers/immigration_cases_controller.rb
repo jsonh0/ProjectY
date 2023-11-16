@@ -28,12 +28,11 @@ class ImmigrationCasesController < ApplicationController
  
     @immigration_case = ImmigrationCase.new(immigration_case_params)
   
-
-
     respond_to do |format|
       if @immigration_case.save
-        format.html { redirect_to immigration_case_url(@immigration_case), notice: "Immigration case was successfully created." }
+        format.html { redirect_to account_path(@immigration_case.fn.account_id), notice: "Immigration case was successfully created." }
         format.json { render :show, status: :created, location: @immigration_case }
+
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @immigration_case.errors, status: :unprocessable_entity }

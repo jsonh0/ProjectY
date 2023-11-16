@@ -17,7 +17,7 @@ class ForeignNational < ApplicationRecord
   has_many  :immigration_cases, class_name: "ImmigrationCase", foreign_key: "foreign_nationals_id"
 
   enum status: {
-    Outside_US: 0,
+    "Outside-US": 0,
     Visa: 1,
     Pending: 2,
     Greencard: 3,
