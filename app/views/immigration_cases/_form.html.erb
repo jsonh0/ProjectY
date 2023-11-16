@@ -21,10 +21,11 @@
   </div>
 
   <div>
-    <%= form.label :case_type, style: "display: block" %>
-    <%= form.number_field :case_type %>
-  </div>
+<%= form.label :case_type, style: "display: block" %>
+<%= form.collection_select :case_type, ImmigrationCase.case_types.keys, :to_s, :humanize, { include_blank: "Select a Case Type" } %>
 
+  </div>
+<br>
   <div>
     <%= form.submit %>
   </div>

@@ -21,15 +21,15 @@
 #  fk_rails_...  (foreign_nationals_id => foreign_nationals.id)
 #
 class ImmigrationCase < ApplicationRecord
-  #belongs_to :ForeignNational, foreign_key: "foreign_national_id"
+  belongs_to :fn, required: true, class_name: "ForeignNational", foreign_key: "foreign_nationals_id", counter_cache: true
   has_many :document
 
   enum case_type: {
-    i140: 'I-140',
-    i485: 'I-485',
-    i131: 'I-131',
-    i765: 'I-765',
-    i129: 'I-129',
-    n400: 'N-400'
+    I140: 0,
+    I485: 1,
+    I131: 2,
+    I765: 3,
+    I129: 4,
+    N400: 5
   }
 end

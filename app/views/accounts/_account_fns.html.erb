@@ -8,9 +8,10 @@
   </div>
   <div class=j"card-body">
     <blockquote class="blockquote mb-0">
-      <p>Item A</p>
-      <p>Item B</p>
-      <p>Item C</p>
+     
+ <% fn.immigration_cases.each do |immigration_case| %>
+  <%= immigration_case.form_type %>
+<% end %>
 
       <%= link_to "#", 
               data: { toggle: "modal", target: "#ImmigrationCaseModal", foreign_nationals_id: fn.id }, 
