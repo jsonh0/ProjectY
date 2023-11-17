@@ -1,10 +1,19 @@
 # Project Y
 
-Personal gratification project for myself by creatinga software that can streamline data entry my previous role as a legal assistant in immigraiton. 
+Personal gratification project for myself by creating a software that can streamline data entry my previous role as a legal assistant in immigraiton. 
 
-## Description
+## Pain Point
 
-USCIS sent hundreds of mail regarding our clients daily. 
+USCIS almost only mails out paper documents. Dealing with 2-3 bins of mail per day is not easy.
 
-This app will help store them to reduce paperwork, enhance data look ups, and designed with legal assistants in mind to help simifly data entry.
+## USer Stories
+
+* As a user, I want to upload and store notices and their data.
+* As a user, I want to view, edit and delete immigration data.
+* As a user, I want to create accounts and add people to that account.
+* As a user, I want the process to be as efficient as possible.
+
+
+
+
 
