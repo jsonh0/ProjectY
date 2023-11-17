@@ -6,7 +6,7 @@ Personal gratification project for myself by creating a software that can stream
 
 USCIS almost only mails out paper documents. Dealing with 2-3 bins of mail per day is not easy.
 
-## USer Stories
+## User Stories
 
 * As a user, I want to upload and store notices and their data.
 * As a user, I want to view, edit and delete immigration data.
