@@ -8,6 +8,8 @@ class ForeignNationalsController < ApplicationController
 
   # GET /foreign_nationals/1 or /foreign_nationals/1.json
   def show
+    @foreign_national = ForeignNational.find(params[:id])
+    @foreign_national_id = @foreign_national.id
   end
 
   # GET /foreign_nationals/new

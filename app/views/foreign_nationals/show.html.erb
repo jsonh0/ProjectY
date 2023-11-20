@@ -8,13 +8,18 @@
 
     <div id="profile" class="page-content">
       <!-- Content for page 1 -->
-      <h1>Cases</h1>
-      
+      <h1><%= @foreign_national.name %>'s Cases</h1>
+
+
+      <%= render "foreign_nationals_cases", foreign_national: @foreign_national %>
+
     </div>
 
     <div id="cases" class="page-content" style="display: none;">
       <!-- Content for page 2 -->
-      <h1>Profile</h1>
+      <h1><%= @foreign_national.name %>'s Profile</h1>
+      <%= render "foreign_nationals_profile", foreign_national: @foreign_national%>
+
     </div>
 
   </div>
