@@ -1,10 +1,39 @@
-<p style="color: green"><%= notice %></p>
+<div class="d-flex">
+  <div class="col-md-10 offset-md-1">
 
-<%= render @foreign_national %>
+    <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+      <label class="form-check-label" for="flexSwitchCheckDefault" id="toggleLabel">Toggle Profile</label>
+    </div>
 
-<div>
-  <%= link_to "Edit this foreign national", edit_foreign_national_path(@foreign_national) %> |
-  <%= link_to "Back to foreign nationals", foreign_nationals_path %>
+    <div id="profile" class="page-content">
+      <!-- Content for page 1 -->
+      <h1>Cases</h1>
+      
+    </div>
 
-  <%= button_to "Destroy this foreign national", @foreign_national, method: :delete %>
+    <div id="cases" class="page-content" style="display: none;">
+      <!-- Content for page 2 -->
+      <h1>Profile</h1>
+    </div>
+
+  </div>
 </div>
+
+<%= render "foreign_nationals_side_button"%>
+
+<script>
+  $(document).ready(function () {
+    $('#flexSwitchCheckDefault').change(function () {
+      if (this.checked) {
+        $('#profile').hide();
+        $('#cases').show();
+        $('#toggleLabel').text('Toggle Cases');
+      } else {
+        $('#profile').show();
+        $('#cases').hide();
+        $('#toggleLabel').text('Toggle Profile');
+      }
+    });
+  });
+</script>
