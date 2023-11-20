@@ -3,10 +3,12 @@
 # Table name: immigration_cases
 #
 #  id                   :bigint           not null, primary key
+#  approval_date        :date
 #  case_type            :integer
 #  expiration_date      :date
-#  notice_date          :date
 #  receipt_number       :string
+#  received_date        :date
+#  sent_date            :date
 #  status               :integer
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null

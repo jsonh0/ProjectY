@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_04_075815) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_20_232852) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -57,10 +57,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_04_075815) do
     t.integer "case_type"
     t.integer "status"
     t.string "receipt_number"
-    t.date "notice_date"
     t.date "expiration_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "approval_date"
+    t.date "received_date"
+    t.date "sent_date"
     t.index ["foreign_nationals_id"], name: "index_immigration_cases_on_foreign_nationals_id"
   end
 
