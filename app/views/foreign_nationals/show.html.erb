@@ -7,16 +7,17 @@
     </div>
 
     <div id="profile" class="page-content">
-      <!-- Content for page 1 -->
-      <h1><%= @foreign_national.name %>'s Cases</h1>
-
-
-      <%= render "foreign_nationals_cases", foreign_national: @foreign_national %>
-
+      <!-- Cases page -->
+      <h1><%= @foreign_national.name.capitalize() %>'s Cases</h1>
+<hr>
+      <% @foreign_national.immigration_cases.each do |immigration_case|%>
+        <%= render "shared/cases", immigration_case: immigration_case%>
+        <br>
+      <% end %>
     </div>
 
     <div id="cases" class="page-content" style="display: none;">
-      <!-- Content for page 2 -->
+      <!-- Profile page with details -->
       <h1><%= @foreign_national.name %>'s Profile</h1>
       <%= render "foreign_nationals_profile", foreign_national: @foreign_national%>
 

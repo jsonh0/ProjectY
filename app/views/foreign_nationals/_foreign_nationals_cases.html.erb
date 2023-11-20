@@ -1,22 +1,13 @@
-<div id="<%= dom_id foreign_national %>">
-  <p>
-    <strong>Name:</strong>
-    <%= foreign_national.name %>
-  </p>
+<% foreign_national.immigration_cases.each do |immigration_case|%>
+  <div class="card">
+    <div class="card-header position-relative" style="transition: background-color 0.3s ease; background-color: #fff;" onmouseover="this.style.backgroundColor='rgba(89, 7, 162, .7)'" onmouseout="this.style.backgroundColor='#fff'">   
+      <strong style= " margin-left: 15px;">
+        <%= link_to immigration_case.case_type, immigration_case_path(immigration_case.id), class: "stretched-link", style: "color: inherit; text-decoration: none;  font-size: 18px;"  %>
+      </strong>
+    </div>
+    <div class="card-body" style="text-align: center;">
+      <h6 class="card-title">Special title treatment</h6>
 
-  <p>
-    <strong>Status:</strong>
-    <%= foreign_national.status %>
-  </p>
-
-  <p>
-    <strong>Birthday:</strong>
-    <%= foreign_national.birthday %>
-  </p>
-
-  <p>
-    <strong>Address:</strong>
-    <%= foreign_national.address %>
-  </p>
-
-</div>
+    </div>
+  </div>
+<% end %>

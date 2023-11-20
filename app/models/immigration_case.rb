@@ -32,4 +32,14 @@ class ImmigrationCase < ApplicationRecord
     "I-129": 4,
     "N-400": 5
   }
+
+  enum status: {
+    "Case Created": 0,
+    "Drafting": 1,
+    "Sent to Government": 2,
+    "Processing": 3,
+    "RFE": 4,
+    "Denied": 5,
+    "Approved": 6
+  }
 end
