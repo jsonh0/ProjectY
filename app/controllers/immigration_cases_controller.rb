@@ -22,6 +22,7 @@ class ImmigrationCasesController < ApplicationController
 
   # GET /immigration_cases/1/edit
   def edit
+    @foreign_national = @immigration_case.foreign_nationals_id
   end
 
   # POST /immigration_cases or /immigration_cases.json
