@@ -12,33 +12,37 @@
   <% end %>
 
   <div>
-     <%= form.hidden_field :foreign_nationals_id, value: @foreign_nationals_id %>
-     <h5><%=@foreign_nationals_id%></h5>
+     <%= form.hidden_field :foreign_nationals_id, value: immigration_case.foreign_nationals_id %>
+     <h5><%=immigration_case.foreign_nationals_id%></h5>
   </div>
 
   <div>
     <%= form.label :case_type, style: "display: block" %>
-    <%= form.number_field :case_type %>
+<%= form.collection_select :case_type, ImmigrationCase.case_types.keys, :to_s, :humanize, { include_blank: "Select a Case Type" } %>
   </div>
 
   <div>
     <%= form.label :status, style: "display: block" %>
-    <%= form.number_field :status %>
+<%= form.collection_select :status, ImmigrationCase.statuses.keys, :to_s, :humanize, { include_blank: "Select a Status" } %>
   </div>
 
   <div>
-    <%= form.label :ReceiptNumber, style: "display: block" %>
-    <%= form.text_field :ReceiptNumber %>
+    <%= form.label :receipt_number, style: "display: block" %>
+    <%= form.text_field :receipt_number %>
   </div>
 
   <div>
-    <%= form.label :NoticeDate, style: "display: block" %>
-    <%= form.date_field :NoticeDate %>
+    <%= form.label :received_date, style: "display: block" %>
+    <%= form.date_field :received_date %>
+  </div>
+ <div>
+    <%= form.label :sent_date, style: "display: block" %>
+    <%= form.date_field :sent_date %>
   </div>
 
   <div>
-    <%= form.label :ExpirationDate, style: "display: block" %>
-    <%= form.date_field :ExpirationDate %>
+    <%= form.label :expiration_date, style: "display: block" %>
+    <%= form.date_field :expiration_date %>
   </div>
 
   <div>
