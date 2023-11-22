@@ -8,6 +8,7 @@ class ImmigrationCasesController < ApplicationController
 
   # GET /immigration_cases/1 or /immigration_cases/1.json
   def show
+    
   end
 
   # GET /immigration_cases/new

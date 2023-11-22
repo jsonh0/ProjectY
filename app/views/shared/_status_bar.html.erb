@@ -1,38 +1,17 @@
-<ul class="steps" ">
-  <li class="step step-success" >
+<ul class="steps">
+  <% (ImmigrationCase.statuses.length - 1).times do |index|%>
+
+    <% if index < ImmigrationCase.statuses[immigration_case.status] %>
+      <li class="step step-success">
+    <% elsif index == ImmigrationCase.statuses[immigration_case.status] %>
+      <li class="step step-active">
+    <% else %>
+      <li class="step">
+    <% end %>
     <div class="step-content">
       <span class="step-circle"><i class="fa-solid fa-check"></i></span>
-      <span class="step-text"><%= ImmigrationCase.statuses.keys[0] %></span>
+      <span class="step-text"><%= ImmigrationCase.statuses.keys[index] %></span>
     </div>
-  </li>
-  <li class="step step-active">
-    <div class="step-content">
-      <span class="step-circle"><i class="fa-solid fa-check"></i></span>
-      <span class="step-text"><%= ImmigrationCase.statuses.keys[1] %></span>
-    </div>
-  </li>
-  <li class="step">
-    <div class="step-content">
-      <span class="step-circle"><i class="fa-solid fa-check"></i></span>
-      <span class="step-text"><%= ImmigrationCase.statuses.keys[2] %></span>
-    </div>
-  </li>
-  <li class="step">
-    <div class="step-content">
-      <span class="step-circle"><i class="fa-solid fa-check"></i></span>
-      <span class="step-text"><%= ImmigrationCase.statuses.keys[3] %></span>
-    </div>
-  </li>
-  <li class="step">
-    <div class="step-content">
-      <span class="step-circle"><i class="fa-solid fa-check"></i></span>
-      <span class="step-text"><%= ImmigrationCase.statuses.keys[4] %></span>
-    </div>
-  </li>
-  <li class="step">
-    <div class="step-content">
-      <span class="step-circle"><i class="fa-solid fa-check"></i></span>
-      <span class="step-text"><%= ImmigrationCase.statuses.keys[6] %></span>
-    </div>
-  </li>
+    </li>
+  <% end %>
 </ul>

@@ -41,7 +41,7 @@ class ImmigrationCase < ApplicationRecord
     "Sent to Government": 2,
     "Processing": 3,
     "RFE": 4,
-    "Denied": 5,
-    "Approved": 6
+    "Approved": 5,
+    "Denied": 6,
   }
 end
