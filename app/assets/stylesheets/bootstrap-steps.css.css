@@ -73,16 +73,15 @@
 
 .step-active .step-circle {
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff
+  background-color: #5907a2;
+  border-color: #5907a2
 }
-
 .step-active .step-circle::before {
-  color: #007bff
+  color: #5907a2
 }
 
 .step-active .step-text {
-  color: #007bff
+  color: #5907a2
 }
 
 .step-error .step-circle {
@@ -100,17 +99,17 @@
 }
 
 .step-success .step-circle {
-  color: #28a745;
-  background-color: #fff;
-  border-color: #28a745
+  color: #fff;
+  background-color: #5907a2;
+  border-color: #5907a2
 }
 
 .step-success .step-circle::before {
-  color: #28a745
+  color: #5907a2
 }
 
 .step-success .step-text {
-  color: #28a745
+  color: #5907a2
 }
 
 /*# sourceMappingURL=bootstrap-steps.min.css.map */
