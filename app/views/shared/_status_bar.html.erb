@@ -1,17 +1,18 @@
-<ul class="steps">
-  <% (ImmigrationCase.statuses.length - 1).times do |index|%>
-
-    <% if index < ImmigrationCase.statuses[immigration_case.status] %>
-      <li class="step step-success">
-    <% elsif index == ImmigrationCase.statuses[immigration_case.status] %>
-      <li class="step step-active">
-    <% else %>
-      <li class="step">
+<% if immigration_case.status != nil %>
+  <ul class="steps">
+    <% (ImmigrationCase.statuses.length - 1).times do |index|%>
+      <% if index < ImmigrationCase.statuses[immigration_case.status] %>
+        <li class="step step-success">
+      <% elsif index == ImmigrationCase.statuses[immigration_case.status] %>
+        <li class="step step-active">
+      <% else %>
+        <li class="step">
+      <% end %>
+        <div class="step-content">
+            <span class="step-circle"><i class="fa-solid fa-check"></i></span>
+            <span class="step-text"><%= ImmigrationCase.statuses.keys[index] %></span>
+        </div>
+        </li>
     <% end %>
-    <div class="step-content">
-      <span class="step-circle"><i class="fa-solid fa-check"></i></span>
-      <span class="step-text"><%= ImmigrationCase.statuses.keys[index] %></span>
-    </div>
-    </li>
-  <% end %>
-</ul>
+  </ul>
+<% end %>
