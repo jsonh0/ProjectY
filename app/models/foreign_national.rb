@@ -25,5 +25,4 @@ class ForeignNational < ApplicationRecord
   }
 
 
-
 end
