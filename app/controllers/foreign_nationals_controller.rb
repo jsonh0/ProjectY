@@ -22,6 +22,8 @@ class ForeignNationalsController < ApplicationController
 
   # GET /foreign_nationals/1/edit
   def edit
+
+
   end
 
   # POST /foreign_nationals or /foreign_nationals.json
