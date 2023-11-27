@@ -13,9 +13,10 @@
     <strong>Notes:</strong>
     <%= account.notes %>
   </p>
-  <p>
-    <strong>Role:</strong>
-    <%= account.accesses[0].role %>
-  </p>
-
+  <% if account.accesses[0] != nil %>
+    <p>
+      <strong>Role:</strong>
+      <%= account.accesses[0].role %>
+    </p>
+  <% end %>
 </div>
