@@ -67,19 +67,13 @@ task({ :sample_data => :environment }) do
         case_type: rand(0..5),
         foreign_nationals_id: fn.id,
         status: status,
-        if status >= 2
-          sent_date: date,
-          if status > 2 && rand < 0.5
-            received_date: date + 3,
-            receipt_number: rn,
-          end
-        end
-        if status == 5
-          approval_date: date + 180,
-          expiration_date: date >> 24,
-        end
-
+        sent_date: status >= 2 ? date : nil,
+        received_date: (status >= 2 && rand < 0.5) ? date + 3 : nil,
+        receipt_number: (status >= 2 && rand < 0.5) ? rn : nil,
+        approval_date: (status == 5) ? date + 180 : nil,
+        expiration_date: (status == 5) ? date >> 24 : nil
       )
+
     end 
   end
   puts "Created #{ImmigrationCase.count} immigration cases"
