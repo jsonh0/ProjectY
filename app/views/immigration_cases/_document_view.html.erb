@@ -10,7 +10,7 @@
         <h5 class="card-title">Document List</h5>
         <ul class="list-group">
           <% @documents.each do |document| %>
-            <a class="list-group-item list-group-item-action" data-toggle="collapse" href="#documentCollapse<%= document.id %>" data-image="<%= document.image %>" data-name="<%= document.name %>" style="border-bottom: 1px solid rgba(0, 0, 0, 0.125);">
+            <a class="list-group-item list-group-item-action" data-toggle="collapse" href="#documentCollapse<%= document.id %>" data-image="<%= document.image %>" data-name="<%= document.name %>" style="transition: background-color 0.3s ease; background-color: #fff;" onmouseover="this.style.backgroundColor='rgba(89, 7, 162, .7)'" onmouseout="this.style.backgroundColor='#fff'">
               <%= document.name %>
             </a>
             <div id="documentCollapse<%= document.id %>" class="collapse" style="border: 1px solid rgba(0, 0, 0, 0.125); border-top: none;">
