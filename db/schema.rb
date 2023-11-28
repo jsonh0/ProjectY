@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_20_232852) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_28_161751) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -31,14 +31,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_20_232852) do
   end
 
   create_table "documents", force: :cascade do |t|
-    t.bigint "case_id_id", null: false
+    t.bigint "immigration_case_id", null: false
     t.string "name"
     t.string "image"
     t.string "extracted_text"
     t.bigint "uploader_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["case_id_id"], name: "index_documents_on_case_id_id"
+    t.index ["immigration_case_id"], name: "index_documents_on_immigration_case_id"
     t.index ["uploader_id"], name: "index_documents_on_uploader_id"
   end
 
@@ -81,7 +81,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_20_232852) do
   end
 
   add_foreign_key "access", "users"
-  add_foreign_key "documents", "immigration_cases", column: "case_id_id"
+  add_foreign_key "documents", "immigration_cases"
   add_foreign_key "documents", "users", column: "uploader_id"
   add_foreign_key "immigration_cases", "foreign_nationals", column: "foreign_nationals_id"
 end

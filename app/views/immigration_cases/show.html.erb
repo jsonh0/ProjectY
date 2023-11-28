@@ -19,15 +19,50 @@
         <i class="fa-solid fa-angles-down"></i>
       </button>
     </div>
+    <!-- Docs-->
 
     <div id="profile" class="page-content">
-      this will be a doc view page!
-      <div class="d-flex justify-content-between align-items-baseline">
+      
 
+
+
+<!-- app/views/documents/documents_index.html.erb -->
+<div class="container mt-4">
+  <div class="row">
+  <div class="col-md-8">
+      <%= render 'immigration_cases/document_detail', document: @documents.first %>
+    </div>
+    <!-- Document List -->
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Document List</h5>
+          <ul class="list-group">
+            <% @documents.each do |document| %>
+             <li class="list-group-item" data-toggle="collapse" href="#documentCollapse<%= document.id %>">
+                <%= document.name %>
+                <div id="documentCollapse<%= document.id %>" class="collapse">
+                  <!-- Add document details here -->
+                  <p>Uploader: <%= document.uploader.username %></p>
+                  <!-- Add other details as needed -->
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
       </div>
-
     </div>
 
+
+    
+  </div>
+</div>
+
+
+
+
+    </div>
+    <!-- Profile-->
     <div id="cases" class="page-content" style="display: none;">
       this will be a profile page!
 
