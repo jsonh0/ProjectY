@@ -1,0 +1,39 @@
+<div class="card">
+  <div class="row no-gutters">
+    <!-- Image on the left -->
+    <div class="col-md-8">
+      <img id="documentImage" src="<%= @documents.first.image %>" alt="<%= @documents.first.name %>" class="img-fluid mb-3">
+    </div>
+    <!-- Text on the right -->
+    <div class="col-md-4">
+      <div class="card-body text-center">
+        <h5 class="card-title">Document List</h5>
+        <ul class="list-group">
+          <% @documents.each do |document| %>
+            <a class="list-group-item list-group-item-action" data-toggle="collapse" href="#documentCollapse<%= document.id %>" data-image="<%= document.image %>" data-name="<%= document.name %>" style="border-bottom: 1px solid rgba(0, 0, 0, 0.125);">
+              <%= document.name %>
+            </a>
+            <div id="documentCollapse<%= document.id %>" class="collapse" style="border: 1px solid rgba(0, 0, 0, 0.125); border-top: none;">
+              <!-- Add document details here -->
+
+              <p>Uploader: <%= document.uploader.username %></p>
+              <p>Uploader: <%= document.created_at %></p>
+            </div>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+  // jQuery code to handle click event on list items
+  $(document).ready(function() {
+    $('.list-group-item').click(function() {
+      var imageSrc = $(this).data('image');
+      var documentName = $(this).data('name');
+      $('#documentImage').attr('src', imageSrc).attr('alt', documentName);
+    });
+  });
+</script>
