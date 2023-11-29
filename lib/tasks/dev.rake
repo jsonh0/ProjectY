@@ -78,7 +78,7 @@ task({ :sample_data => :environment }) do
     rand(1..10).times do
       d = Document.create(
         name: Faker::Book.title,
-        image: "https:/robohash.org/#{rand(1..10000)}",
+        image: "https://robohash.org/#{rand(1..10000)}",
         immigration_case_id: immigration_case.id,
         uploader_id: User.first.id
       )

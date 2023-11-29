@@ -2,7 +2,7 @@
   <div class="row no-gutters">
     <!-- Image on the left -->
     <div class="col-md-8">
-      <img id="documentImage" src="<%= @documents.first.image %>" alt="<%= @documents.first.name %>" class="img-responsive">
+      <img id="documentImage" src="<%= @documents.first.image %>" alt="<%= @documents.first.name %>" class="img-fluid mb-3">
     </div>
     <!-- Text on the right -->
     <div class="col-md-4">
@@ -33,5 +33,3 @@
     $('#cardTitle').text(documentName);
   }
 </script>
-
-
