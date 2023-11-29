@@ -22,7 +22,7 @@
 #  fk_rails_...  (uploader_id => users.id)
 #
 class Document < ApplicationRecord
-  mount_uploader :image, ImageUploader
+  #mount_uploader :image, ImageUploader
 
   belongs_to :immigration_case, class_name: "ImmigrationCase"
   belongs_to :uploader, class_name: "User"

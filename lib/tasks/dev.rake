@@ -2,9 +2,10 @@ desc "Fill the database tables with some sample data"
 task({ :sample_data => :environment }) do
   if Rails.env.development?
     ActiveRecord::Base.transaction do
+      Document.destroy_all
       Access.destroy_all
       User.destroy_all
-
+      
       ImmigrationCase.destroy_all
       ForeignNational.destroy_all
       Account.destroy_all
@@ -77,7 +78,7 @@ task({ :sample_data => :environment }) do
     rand(1..10).times do
       d = Document.create(
         name: Faker::Book.title,
-        image: Faker::Avatar.image(slug: "my-own-slug"),
+        image: "https:/robohash.org/#{rand(1..10000)}",
         immigration_case_id: immigration_case.id,
         uploader_id: User.first.id
       )
