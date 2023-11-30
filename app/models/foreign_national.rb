@@ -13,7 +13,7 @@
 #
 class ForeignNational < ApplicationRecord
   validates :name, presence: true
-  belongs_to :account
+  belongs_to :account, foreign_key: "account_id"
   has_many  :immigration_cases, class_name: "ImmigrationCase", foreign_key: "foreign_nationals_id"
 
   enum status: {

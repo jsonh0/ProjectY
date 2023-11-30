@@ -23,14 +23,15 @@
 
     <div id="profile" class="page-content">
       
-
+     <% if @documents.first != nil %>
       <%= render 'immigration_cases/document_view', document: @documents.first %>
-
+    <% end %>
 
     </div>
     <!-- Profile-->
     <div id="cases" class="page-content" style="display: none;">
       this will be a profile page!
+      <%=render "shared/status_bar", immigration_case: @immigration_case%>
 
     </div>
   </div>
