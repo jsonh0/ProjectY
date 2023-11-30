@@ -25,6 +25,7 @@
 class ImmigrationCase < ApplicationRecord
   belongs_to :fn, required: true, class_name: "ForeignNational", foreign_key: "foreign_nationals_id"
   has_many :document
+  accepts_nested_attributes_for :document
 
   enum case_type: {
     "I-140": 0,

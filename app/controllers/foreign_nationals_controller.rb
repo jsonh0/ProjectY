@@ -10,6 +10,7 @@ class ForeignNationalsController < ApplicationController
   def show
     @foreign_national = ForeignNational.find(params[:id])
     @foreign_national_id = @foreign_national.id
+    @account_id = @foreign_national.account_id
   end
 
   # GET /foreign_nationals/new
@@ -39,7 +40,7 @@ class ForeignNationalsController < ApplicationController
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @foreign_national.errors, status: :unprocessable_entity }
-        redirect_to account_path(@account_id)
+
       end
     end
   end
@@ -52,15 +53,19 @@ class ForeignNationalsController < ApplicationController
         format.html { redirect_to foreign_national_url(@foreign_national), notice: "Foreign national was successfully updated." }
         format.json { render :show, status: :ok, location: @foreign_national }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        flash.now[:alert] = "Error updating foreign national. Please check the form."
+
+        format.html { render :show, status: :unprocessable_entity }
         format.json { render json: @foreign_national.errors, status: :unprocessable_entity }
+  
       end
     end
   end
+  
 
   # DELETE /foreign_nationals/1 or /foreign_nationals/1.json
   def destroy
-    
+    account_id @foreign_national.account_id
     @foreign_national.immigration_cases.each do |immigration_case|
       immigration_case.document.each do |doc|
         doc.destroy
@@ -74,7 +79,7 @@ class ForeignNationalsController < ApplicationController
       format.html { redirect_to foreign_nationals_url, notice: "Foreign national was successfully destroyed." }
       format.json { head :no_content }
     end
-    redirect_to account_path(@account_id)
+    redirect_to account_path(account_id)
   end
 
   private

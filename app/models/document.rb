@@ -26,4 +26,5 @@ class Document < ApplicationRecord
 
   belongs_to :immigration_case, class_name: "ImmigrationCase"
   belongs_to :uploader, class_name: "User"
+  accepts_nested_attributes_for :immigration_case
 end

@@ -4,12 +4,16 @@
   </button>
   <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
 
+  <li>
+  <%= link_to "Edit this foreign national", edit_foreign_national_path(@foreign_national), class: "dropdown-item", data: { toggle: "modal", target: "#foreignNationalEditModal" } %>
+</li>
 
-    <li> <%= link_to "Edit this foreign national", edit_foreign_national_path(@foreign_national), class: "dropdown-item" %></li>
     <li><hr class="dropdown-divider"></li>
     <li>
-    <%= button_to "Destroy this foreign national", @foreign_national, method: :delete,  class: "dropdown-item", style: "color: #FD0404" %>
+      <%= button_to "Destroy this foreign national", @foreign_national, method: :delete,  class: "dropdown-item", style: "color: #FD0404" %>
     </li>
   </ul>
 
 </div>
+
+<%= render "foreign_nationals/edit" %>
