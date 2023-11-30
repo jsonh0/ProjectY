@@ -26,10 +26,10 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       if @document.save
-        format.html { redirect_to document_url(@document), notice: "Document was successfully created." }
+        format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), notice: "Document was successfully created." }
         format.json { render :show, status: :created, location: @document }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render redirect_to request.referer || foreign_national_url(params[immigration_case_id]), status: :unprocessable_entity }
         format.json { render json: @document.errors, status: :unprocessable_entity }
       end
     end
@@ -66,6 +66,6 @@ class DocumentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def document_params
-      params.require(:document).permit(:case_id, :name, :image, :extracted_text, :uploader_id)
+      params.require(:document).permit(:immigration_case_id, :name, :image, :extracted_text, :uploader_id)
     end
 end

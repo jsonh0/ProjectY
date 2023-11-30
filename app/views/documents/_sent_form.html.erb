@@ -31,6 +31,13 @@
 
   <%= form.hidden_field :uploader_id, value: current_user.id %>
 
+
+  <%= form.fields_for :immigration_case do |i_form| %>
+
+    <%= i_form.hidden_field :status, value: 2%>
+  <% end %>
+
+
   <div>
     <%= form.submit %>
   </div>
