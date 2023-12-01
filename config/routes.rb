@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :documents
+  resources :documents do
+    post 'sent', on: :collection
+  end
   resources :immigration_cases
   resources :foreign_nationals
   resources :accounts 

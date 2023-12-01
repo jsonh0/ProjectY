@@ -8,7 +8,6 @@ class DocumentsController < ApplicationController
 
   # GET /documents/1 or /documents/1.json
   def show
-
   end
 
   # GET /documents/new
@@ -30,6 +29,21 @@ class DocumentsController < ApplicationController
         format.json { render :show, status: :created, location: @document }
       else
         format.html { render redirect_to request.referer || foreign_national_url(params[immigration_case_id]), status: :unprocessable_entity }
+        format.json { render json: @document.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def sent
+    @document = Document.new(document_params)
+
+    respond_to do |format|
+      if @document.save
+        @document.immigration_case.update(status: ImmigrationCase.statuses.keys[2])
+        format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), notice: "Document was successfully created." }
+        format.json { render :show, status: :created, location: @document }
+      else
+        format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), status: :unprocessable_entity }
         format.json { render json: @document.errors, status: :unprocessable_entity }
       end
     end
@@ -59,13 +73,14 @@ class DocumentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_document
-      @document = Document.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def document_params
-      params.require(:document).permit(:immigration_case_id, :name, :image, :extracted_text, :uploader_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_document
+    @document = Document.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def document_params
+    params.require(:document).permit(:immigration_case_id, :name, :image, :extracted_text, :uploader_id, immigration_case_attributes: [:status])
+  end
 end
