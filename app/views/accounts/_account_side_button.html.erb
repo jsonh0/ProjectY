@@ -10,6 +10,7 @@
     <li><%= link_to "Add Foreign National", "#", class: "dropdown-item", data: { toggle: "modal", target: "#foreignNationalModal",  account_id: params[:account_id]  } %></li>
    
     <li><%= link_to "Edit account", edit_account_path(@account), class: "dropdown-item" %></li>
+    
     <li><hr class="dropdown-divider"></li>
     <li><%= button_to "Destroy this account", @account, method: :delete,  class: "dropdown-item", style: "color: #FD0404" %></li>
    

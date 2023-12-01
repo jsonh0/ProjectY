@@ -7,7 +7,7 @@
     <li><%= link_to "Mark as Sent", "#", class: "dropdown-item", data: { toggle: "modal", target: "#MarkAsSentModal"  } %></li>
     <li>  <%= link_to "Edit this immigration case", edit_immigration_case_path(@immigration_case), class: "dropdown-item" %> </li>
      
-    <li> <%= link_to "Back to immigration cases", immigration_cases_path,  class: "dropdown-item" %></li>
+    <li> <%= link_to "Back to Foreign National Page", foreign_national_path(@immigration_case.fn.id),  class: "dropdown-item" %></li>
 
     <li><hr class="dropdown-divider"></li>
     <li> 
