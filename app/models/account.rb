@@ -19,5 +19,8 @@ class Account < ApplicationRecord
     params.require(:account).permit(:name, :notes, access_attributes: [:role])
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "id", "name", "notes", "updated_at"]
+  end
 
 end
