@@ -51,6 +51,26 @@ class DocumentsController < ApplicationController
     end
   end
 
+  def add_receipt
+    @document = Document.new(document_params)
+    respond_to do |format|
+      if @document.extracted_text.blank?
+        format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), status: :unprocessable_entity }
+        format.json { render json: @document.errors, status: :unprocessable_entity }
+      elsif @document.name.blank? && @document.image.nil?
+        @document.immigration_case.update(status: ImmigrationCase.statuses.keys[3])
+        format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), notice: "Marked as Sent" }
+      elsif @document.save
+        @document.immigration_case.update(status: ImmigrationCase.statuses.keys[3])
+        format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), notice: "Document was successfully created. Marked as Sent" }
+        format.json { render :show, status: :created, location: @document }
+      else
+        format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), status: :unprocessable_entity }
+        format.json { render json: @document.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # PATCH/PUT /documents/1 or /documents/1.json
   def update
     respond_to do |format|
@@ -66,7 +86,7 @@ class DocumentsController < ApplicationController
 
   # DELETE /documents/1 or /documents/1.json
   def destroy
-    id = @document.immigration_case.id 
+    id = @document.immigration_case.id
     @document.destroy
 
     respond_to do |format|
