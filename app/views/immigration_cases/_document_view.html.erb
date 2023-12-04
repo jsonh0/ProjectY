@@ -16,8 +16,37 @@
             <div id="documentCollapse<%= document.id %>" class="collapse" style="border: 1px solid rgba(0, 0, 0, 0.125); border-top: none;">
               <!-- Add document details here -->
 
-              <p>Uploader: <%= document.uploader.username %></p>
-              <p>Uploader: <%= document.created_at %></p>
+
+
+<div class="d-flex justify-content-between align-items-center">
+  <p style="margin:  10px 0px 0px 20px;">Uploader: <%= document.uploader.username %></p>
+
+  <%= button_to document_path(document),
+                method: :delete,
+                data: { confirm: "Are you sure?" },
+                class: "btn btn-danger ms-2 ml-auto",
+                style: "width: 30px; padding: 5px; text-decoration: none; color: #fff; font-size: 12px;",
+                onmouseover: "addShakeEffect(this);",
+                onmouseout: "removeShakeEffect(this);" do %>
+    <i class="fas fa-trash"></i>
+  <% end %>
+  <script>
+  function addShakeEffect(element) {
+    var icon = element.querySelector('.fa-trash');
+    icon.classList.add('fa-shake');
+  }
+
+  function removeShakeEffect(element) {
+    var icon = element.querySelector('.fa-trash');
+    icon.classList.remove('fa-shake');
+  }
+</script>
+</div>
+
+
+              
+           
+              <p>Uploaded Date: <%= document.created_at %></p>
             </div>
           <% end %>
         </ul>

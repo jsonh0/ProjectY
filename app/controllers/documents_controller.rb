@@ -36,11 +36,13 @@ class DocumentsController < ApplicationController
 
   def sent
     @document = Document.new(document_params)
-
     respond_to do |format|
-      if @document.save
+      if @document.name.blank? && @document.image.nil?
         @document.immigration_case.update(status: ImmigrationCase.statuses.keys[2])
-        format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), notice: "Document was successfully created." }
+        format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), notice: "Marked as Sent" }
+      elsif @document.save
+        @document.immigration_case.update(status: ImmigrationCase.statuses.keys[2])
+        format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), notice: "Document was successfully created. Marked as Sent" }
         format.json { render :show, status: :created, location: @document }
       else
         format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), status: :unprocessable_entity }
@@ -64,10 +66,11 @@ class DocumentsController < ApplicationController
 
   # DELETE /documents/1 or /documents/1.json
   def destroy
+    id = @document.immigration_case.id 
     @document.destroy
 
     respond_to do |format|
-      format.html { redirect_to documents_url, notice: "Document was successfully destroyed." }
+      format.html { redirect_to immigration_case_path(id), notice: "Document was successfully destroyed." }
       format.json { head :no_content }
     end
   end
