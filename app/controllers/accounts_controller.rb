@@ -12,20 +12,7 @@ class AccountsController < ApplicationController
     
   end
 
-  def search
-    if current_user.admin?
-      @q = Account.ransack(params[:q])
-      @accounts = @q.result
-    else
-      @accounts = current_user.accounts
-    end
 
-    respond_to do |format|
-      format.html 
-      format.json { render :show, status: :created, location: @q }
-
-    end
-  end
 
   # GET /accounts/1 or /accounts/1.json
   def show
