@@ -3,18 +3,28 @@ class AccountsController < ApplicationController
 
   # GET /accounts or /accounts.json
   def index
-    @accounts = Account.all
+    @accounts = if current_user.admin?
+      @q = Account.ransack(params[:q])
+      @accounts = @q.result
+    else
+      current_user.accounts
+    end
+    
   end
+
+
 
   # GET /accounts/1 or /accounts/1.json
   def show
-  
-    
+    @account = Account.find(params[:id])
+    @account_id = @account.id
+
   end
 
   # GET /accounts/new
   def new
     @account = Account.new
+
   end
 
   # GET /accounts/1/edit
@@ -62,6 +72,8 @@ class AccountsController < ApplicationController
     end
   end
 
+ 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_account
@@ -70,6 +82,10 @@ class AccountsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def account_params
-      params.require(:account).permit(:name, :notes)
+      params.require(:account).permit(:name, :notes, :username_cont)
+    end
+
+    def pass_fn_id(id)
+      @fn_id = id
     end
 end

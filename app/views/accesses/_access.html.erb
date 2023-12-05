@@ -1,0 +1,17 @@
+<div class="card" >
+  <div class="card-header">
+    <div  id="<%= dom_id access %>">
+      <div class="card-body">
+        <h5 class="card-title">User: <%= access.user.username %> (<%=access.user.id%>)</h5>
+        <p class="card-text">Account:  <%= access.account.name%> (<%=access.account.id%>)</p>
+        <p class="card-text">Role:   <%=   access.role %></p>
+        <% unless local_variable[:hide_specific_part] %>
+          <div class="text-center">
+          <%=  link_to "Edit this access", edit_access_path(access) , class: "btn btn-primary", style: "margin-bottom: 10px"%>
+          <%= button_to "Destroy this access", @access, method: :delete , class: "btn btn-primary"%>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -25,10 +25,47 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       if @document.save
-        format.html { redirect_to document_url(@document), notice: "Document was successfully created." }
+        format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), notice: "Document was successfully created." }
         format.json { render :show, status: :created, location: @document }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render redirect_to request.referer || foreign_national_url(params[immigration_case_id]), status: :unprocessable_entity }
+        format.json { render json: @document.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def sent
+    @document = Document.new(document_params)
+    respond_to do |format|
+      if @document.name.blank? && @document.image.nil?
+        @document.immigration_case.update(status: ImmigrationCase.statuses.keys[2])
+        format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), notice: "Marked as Sent" }
+      elsif @document.save
+        @document.immigration_case.update(status: ImmigrationCase.statuses.keys[2])
+        format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), notice: "Document was successfully created. Marked as Sent" }
+        format.json { render :show, status: :created, location: @document }
+      else
+        format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), status: :unprocessable_entity }
+        format.json { render json: @document.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def add_receipt
+    @document = Document.new(document_params)
+    respond_to do |format|
+      if @document.extracted_text.blank?
+        format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), status: :unprocessable_entity }
+        format.json { render json: @document.errors, status: :unprocessable_entity }
+      elsif @document.name.blank? && @document.image.nil?
+        @document.immigration_case.update(status: ImmigrationCase.statuses.keys[3])
+        format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), notice: "Marked as Sent" }
+      elsif @document.save
+        @document.immigration_case.update(status: ImmigrationCase.statuses.keys[3])
+        format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), notice: "Document was successfully created. Marked as Sent" }
+        format.json { render :show, status: :created, location: @document }
+      else
+        format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), status: :unprocessable_entity }
         format.json { render json: @document.errors, status: :unprocessable_entity }
       end
     end
@@ -49,22 +86,24 @@ class DocumentsController < ApplicationController
 
   # DELETE /documents/1 or /documents/1.json
   def destroy
+    id = @document.immigration_case.id
     @document.destroy
 
     respond_to do |format|
-      format.html { redirect_to documents_url, notice: "Document was successfully destroyed." }
+      format.html { redirect_to immigration_case_path(id), notice: "Document was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_document
-      @document = Document.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def document_params
-      params.require(:document).permit(:case_id, :name, :image, :extracted_text, :uploader_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_document
+    @document = Document.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def document_params
+    params.require(:document).permit(:immigration_case_id, :name, :image, :extracted_text, :uploader_id, immigration_case_attributes: [:status])
+  end
 end

@@ -20,5 +20,10 @@ class Access < ApplicationRecord
   self.table_name = "access" 
   belongs_to :user, class_name: "User", foreign_key: "user_id"
   belongs_to :account, class_name: "Account", foreign_key: "account_id"
+
+
   enum role: { admin: 0, foreign_national: 1, legal: 2 }
+
+
+
 end

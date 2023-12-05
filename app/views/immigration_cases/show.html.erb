@@ -1,10 +1,58 @@
-<p style="color: green"><%= notice %></p>
+<div class="d-flex">
+  <div class="col-md-10 offset-md-1">
+    <div class="d-flex justify-content-between align-items-baseline">
+      <h1><%= @immigration_case.case_type %> for <%=@immigration_case.fn.name%></h1>
+    </div>
+    <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+      <label class="form-check-label" for="flexSwitchCheckDefault" id="toggleLabel">Toggle Profile</label>
+    </div>
+    <hr>
 
-<%= render @immigration_case %>
+    <div id="collapsible-content" class="collapse">
+      <!-- Content inside the collapsible element -->
+      <p>This is some collapsible content. It will be hidden or shown when the button is clicked.</p>
+    </div>
 
-<div>
-  <%= link_to "Edit this immigration case", edit_immigration_case_path(@immigration_case) %> |
-  <%= link_to "Back to immigration cases", immigration_cases_path %>
+    <div style="text-align: center; margin-top: 10px;">
+      <button class="btn btn-success" data-toggle="collapse" data-target="#collapsible-content">
+        <i class="fa-solid fa-angles-down"></i>
+      </button>
+    </div>
+    <!-- Docs-->
 
-  <%= button_to "Destroy this immigration case", @immigration_case, method: :delete %>
+    <div id="profile" class="page-content">
+      
+     <% if @documents.first != nil %>
+      <%= render 'immigration_cases/document_view', document: @documents.first %>
+    <% end %>
+
+    </div>
+    <!-- Profile-->
+    <div id="cases" class="page-content" style="display: none;">
+      this will be a profile page!
+      <%=render "shared/status_bar", immigration_case: @immigration_case%>
+
+    </div>
+  </div>
 </div>
+
+<script>
+  $(document).ready(function () {
+    $('#flexSwitchCheckDefault').change(function () {
+      if (this.checked) {
+        $('#profile').hide();
+        $('#cases').show();
+        $('#toggleLabel').text('Toggle Cases');
+      } else {
+        $('#profile').show();
+        $('#cases').hide();
+        $('#toggleLabel').text('Toggle Profile');
+      }
+    });
+  });
+</script>
+
+<%= render "immigration_case_side_button"  %>
+<%= render "sent"%>
+<%= render "add_receipt"%>

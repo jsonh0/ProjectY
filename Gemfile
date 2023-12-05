@@ -46,6 +46,9 @@ gem "bootsnap", require: false
 gem "carrierwave"
 gem "cloudinary"
 
+#search
+gem 'ransack'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 

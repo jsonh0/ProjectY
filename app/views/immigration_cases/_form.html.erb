@@ -11,36 +11,18 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :ForeignNational_id, style: "display: block" %>
-    <%= form.text_field :ForeignNational_id %>
+  <div> 
+
+  <%= form.hidden_field :foreign_nationals_id, value: foreign_nationals_id %>
+
   </div>
 
   <div>
-    <%= form.label :case_type, style: "display: block" %>
-    <%= form.number_field :case_type %>
-  </div>
+<%= form.label :case_type, style: "display: block" %>
+<%= form.collection_select :case_type, ImmigrationCase.case_types.keys, :to_s, :humanize, { include_blank: "Select a Case Type" } %>
 
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.number_field :status %>
   </div>
-
-  <div>
-    <%= form.label :ReceiptNumber, style: "display: block" %>
-    <%= form.text_field :ReceiptNumber %>
-  </div>
-
-  <div>
-    <%= form.label :NoticeDate, style: "display: block" %>
-    <%= form.date_field :NoticeDate %>
-  </div>
-
-  <div>
-    <%= form.label :ExpirationDate, style: "display: block" %>
-    <%= form.date_field :ExpirationDate %>
-  </div>
-
+<br>
   <div>
     <%= form.submit %>
   </div>

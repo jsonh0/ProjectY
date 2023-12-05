@@ -1,0 +1,35 @@
+<%= form_with(model: access) do |form| %>
+  <% if access.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(access.errors.count, "error") %> prohibited this access from being saved:</h2>
+      <ul>
+        <% access.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div style= "padding-bottom: 10px; " >
+    <%= form.label :user_id, "Select User" %>
+    <%= form.collection_select :user_id, User.all, :id, :username, prompt: "Select a User"%> 
+  </div>
+
+  <div style= "padding-bottom: 10px;" >
+    <%= form.label :account_id, "Select Account" %>
+    <%= form.collection_select :account_id, Account.all, :id, :name, prompt: "Select an Account" %>
+  </div>
+
+
+
+
+
+  <div style= "padding-bottom: 10px; " >
+  <%= form.label :user_access_role, "Select Role" %>
+  <%= form.collection_select :role, Access.roles.keys, :to_s, :humanize, { include_blank: "Select a Role" } %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+
+<% end %>

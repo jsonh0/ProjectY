@@ -1,18 +1,22 @@
 <div id="<%= dom_id account %>">
-  <p>
-    <strong>Name:</strong>
-    <%= account.name %>
-  </p>
 
+  <div class="col-md-6">
+    <h2><%= account.name %> (<%= account.id%>)</h2>
+
+  </div>
+
+</div>
+
+<hr>
+<div style="display: flex; justify-content: space-between; align-items: baseline;">
   <p>
     <strong>Notes:</strong>
     <%= account.notes %>
   </p>
-
-  <p>
-    <strong>Role:</strong>
-    <%= account.accesses[0].role %>
-  </p>
-
-
+  <% if account.accesses[0] != nil %>
+    <p>
+      <strong>Role:</strong>
+      <%= account.accesses[0].role %>
+    </p>
+  <% end %>
 </div>

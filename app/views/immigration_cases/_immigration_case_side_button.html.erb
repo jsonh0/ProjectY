@@ -1,0 +1,25 @@
+<div class="position-fixed bottom-0 start-0">
+  <button class="btn btn-light" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #9205C4">
+    <i class="bi bi-power bi-3x"></i>
+  </button>
+  <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
+
+    <li><%= link_to "Mark as Sent", "#", class: "dropdown-item", data: { toggle: "modal", target: "#MarkAsSentModal"  } %></li>
+
+    <li><%= link_to "Add Receipt", "#", class: "dropdown-item", data: { toggle: "modal", target: "#AddReceipt"  } %></li>
+
+    <li><hr class="dropdown-divider"></li>
+
+    <li>  <%= link_to "Edit this immigration case", edit_immigration_case_path(@immigration_case), class: "dropdown-item" %> </li>
+     
+    <li> <%= link_to "Back to Foreign National Page", foreign_national_path(@immigration_case.fn.id),  class: "dropdown-item" %></li>
+
+    <li><hr class="dropdown-divider"></li>
+    <li> 
+     <%= button_to "Destroy this immigration case", @immigration_case, method: :delete , class: "dropdown-item", style: "color: #FD0404"%>
+    
+    </li>
+  </ul>
+
+</div>
+  

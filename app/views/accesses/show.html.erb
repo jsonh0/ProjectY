@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @access , local_variable: { hide_specific_part: true }%>
+
+<div>
+  <%= link_to "Edit this access", edit_access_path(@access) %> |
+  <%= link_to "Back to accesses", accesses_path %>
+
+  <%= button_to "Destroy this access", @access, method: :delete %>
+</div>

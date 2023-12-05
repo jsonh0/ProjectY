@@ -1,0 +1,37 @@
+<div class="card" style="margin-top: 10px; margin-bottom: 10px;">
+  <div class="card-header position-relative" style="transition: background-color 0.3s ease; background-color: #fff;" onmouseover="this.style.backgroundColor='rgba(89, 7, 162, .7)'" onmouseout="this.style.backgroundColor='#fff'">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; ">
+      <h5> 
+        <%= link_to fn.name.capitalize(), foreign_national_path(fn.id), class: "stretched-link", style: "color: inherit; text-decoration: none;  font-size: 20px; display: block;"  %>
+      </h5>
+
+      <h5><%= fn.status%></h5>
+    </div>
+  </div>
+  <div class=j"card-body"  >
+
+    <% fn.immigration_cases.each do |immigration_case| %>
+
+      <div class= "col-md-15 offset-md-0" style="padding: 10px">
+        <%= render "shared/cases", immigration_case: immigration_case%>
+      </div>
+ 
+    <% end %>
+
+    <%= link_to "#", 
+              data: { toggle: "modal", target: "#ImmigrationCaseModal#{fn.id}", fn: fn }, 
+              class: "btn btn-light d-flex justify-content-between align-items-baseline ms-auto", 
+              style: "width: 40px; text-decoration: none; color: #000;",
+              onmouseover: "this.style.backgroundColor='#9205C4';",
+              onmouseout: "this.style.backgroundColor='transparent';" do %>
+      <i class="fas fa-plus-square"></i>
+
+    <% end %>
+
+  </div>
+
+
+  <%= render "shared/new_case", fn: fn.id %>
+     
+ 
+</div>

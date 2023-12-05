@@ -1,14 +1,18 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Accounts</h1>
-
-<div id="accounts">
+<div class="row" style="margin: 0,auto;" >
   <% @accounts.each do |account| %>
-    <%= render account %>
-    <p>
-      <%= link_to "Show this account", account %>
-    </p>
+    <div class="col mx-auto" style= "margin: 20px;  display: flex;
+  justify-content: space-around;">
+      <div class="card mb-2" style="width: 18rem;
+     " id="accounts", >
+        <div class="card-header" style="display: flex; justify-content: space-between;">
+          <span style="margin-right: auto;"><%= account.name %></span>
+          <span style="margin-left: auto;">ID: <%= account.id %></span>
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= account.notes %></p>
+        </div>
+            <%= link_to "Show Account", account, class: "btn", style: "background-color: rgba(89, 7, 162, 0.7);" %>
+      </div>
+    </div>
   <% end %>
 </div>
-
-<%= link_to "New account", new_account_path %>

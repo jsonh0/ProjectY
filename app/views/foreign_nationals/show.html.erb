@@ -1,10 +1,57 @@
-<p style="color: green"><%= notice %></p>
+<div class="d-flex">
+  <div class="col-md-10 offset-md-1">
 
-<%= render @foreign_national %>
+    <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+      <label class="form-check-label" for="flexSwitchCheckDefault" id="toggleLabel">Toggle Profile</label>
+    </div>
 
-<div>
-  <%= link_to "Edit this foreign national", edit_foreign_national_path(@foreign_national) %> |
-  <%= link_to "Back to foreign nationals", foreign_nationals_path %>
+    <div id="profile" class="page-content">
+      <!-- Cases page -->
+      <div class="d-flex justify-content-between align-items-baseline">
+        <h1><%= @foreign_national.name.capitalize() %>'s Cases</h1>
 
-  <%= button_to "Destroy this foreign national", @foreign_national, method: :delete %>
+        <%= link_to "#", 
+          data: { toggle: "modal", target: "#ImmigrationCaseModal#{@foreign_national.id}", fn: @foreign_national }, 
+          class: "btn btn-light ms-2", 
+          style: "width: 40px; text-decoration: none; color: #000;",
+          onmouseover: "this.style.backgroundColor='#9205C4';",
+          onmouseout: "this.style.backgroundColor='transparent';" do %>
+          <i class="fas fa-plus-square"></i>
+        <% end %>
+      </div>
+      <%= render "shared/new_case", fn: @foreign_national_id %>
+      <hr>
+      <% @foreign_national.immigration_cases.each do |immigration_case|%>
+        <%= render "shared/cases", immigration_case: immigration_case%>
+        <br>
+      <% end %>
+    </div>
+
+    <div id="cases" class="page-content" style="display: none;">
+      <!-- Profile page with details -->
+      <h1><%= @foreign_national.name %>'s Profile</h1>
+      <%= render "foreign_nationals_profile", foreign_national: @foreign_national%>
+
+    </div>
+
+  </div>
 </div>
+
+<%= render "foreign_nationals_side_button"%>
+
+<script>
+  $(document).ready(function () {
+    $('#flexSwitchCheckDefault').change(function () {
+      if (this.checked) {
+        $('#profile').hide();
+        $('#cases').show();
+        $('#toggleLabel').text('Toggle Cases');
+      } else {
+        $('#profile').show();
+        $('#cases').hide();
+        $('#toggleLabel').text('Toggle Profile');
+      }
+    });
+  });
+</script>

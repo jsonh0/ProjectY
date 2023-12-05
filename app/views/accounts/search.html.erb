@@ -1,0 +1,22 @@
+<div class="row" style="margin: 0 auto;">
+  <% @results.each do |result| %>
+    <div class="col mx-auto" style="margin: 20px; display: flex; justify-content: space-around;">
+      <div class="card" style="width: 18rem;">
+        <div class="card-header" style="display: flex; justify-content: space-between;">
+          <span><%= result.name %></span>
+          <span>ID: <%= result.id %></span>
+        </div>
+        <div class="card-body">
+        <% if result.respond_to?(:notes)
+ %>
+           <p class="card-text"><%= result.notes %></p>
+        <% elsif result.respond_to?(:immigration_cases) %>
+          <p class="card-text">Case Count: <%= result.immigration_cases.count %></p>
+        <% end %>
+       
+        </div>
+        <%= link_to "Show #{result.class}", result, class: "btn", style: "background-color: rgba(89, 7, 162, 0.7);" %>
+      </div>
+    </div>
+  <% end %>
+</div>

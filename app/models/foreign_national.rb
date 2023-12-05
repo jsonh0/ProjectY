@@ -12,16 +12,19 @@
 #  account_id :integer
 #
 class ForeignNational < ApplicationRecord
+  validates :name, presence: true
+  belongs_to :account, foreign_key: "account_id"
+  has_many  :immigration_cases, class_name: "ImmigrationCase", foreign_key: "foreign_nationals_id"
 
   enum status: {
-    outside_US: 0,
-    visa: 1,
-    pending: 2,
-    greencard: 3,
-    citizen: 4 # New status value
+    "Outside-US": 0,
+    Visa: 1,
+    Pending: 2,
+    Greencard: 3,
+    Citizen: 4 # New status value
   }
-
-  belongs_to :account
-  has_many :immigraiton_case
+  def self.ransackable_attributes(auth_object = nil)
+    ["account_id", "id", "name"]
+  end
 
 end
