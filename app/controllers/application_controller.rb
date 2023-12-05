@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
         @results = current_user.accounts.ransack(params[:q]).result
       end
       respond_to do |format|
-        format.html { render 'accounts/search' }
+        format.html { render 'shared/search' }
         format.json { render json: @accounts }
       end
     end
