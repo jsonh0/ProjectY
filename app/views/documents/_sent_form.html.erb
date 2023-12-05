@@ -2,7 +2,6 @@
   <% if document.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(document.errors.count, "error") %> prohibited this document from being saved:</h2>
-
       <ul>
         <% document.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -12,6 +11,7 @@
   <% end %>
 
   <%= form.hidden_field :immigration_case_id, value: immigration_case_id %>
+
   <div>
     <%= form.label :name, style: "display: block" %>
     <%= form.text_field :name %>
@@ -22,16 +22,13 @@
     <%= form.text_field :image %>
   </div>
 
-  <div>
-    <%= form.label :extracted_text, style: "display: block" %>
-    <%= form.text_field :extracted_text %>
-  </div>
-
   <%= form.hidden_field :uploader_id, value: current_user.id %>
 
-  <%= form.fields_for :immigration_case do |i_form| %>
-    <%= i_form.hidden_field :id, value: immigration_case_id %>
-    <%= i_form.hidden_field :status, value: 2%>
+  <%= form.fields_for :immigration_case, document.build_immigration_case do |immigration_case_form| %>
+    <div>
+      <%= immigration_case_form.label :sent_date, "Sent Date", style: "display: block" %>
+      <%= immigration_case_form.date_field :sent_date %>
+    </div>
   <% end %>
 
   <div>
