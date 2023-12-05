@@ -23,6 +23,8 @@ class ForeignNational < ApplicationRecord
     Greencard: 3,
     Citizen: 4 # New status value
   }
-
+  def self.ransackable_attributes(auth_object = nil)
+    ["account_id", "id", "name"]
+  end
 
 end

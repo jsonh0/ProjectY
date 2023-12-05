@@ -3,7 +3,14 @@ class ForeignNationalsController < ApplicationController
 
   # GET /foreign_nationals or /foreign_nationals.json
   def index
-    @foreign_nationals = ForeignNational.all
+
+    @foreign_nationals = if current_user.admin?
+      @q = ForeignNational.ransack(params[:q])
+      @ForeignNational = @q.result
+    else
+      current_user.ForeignNational
+    end
+    
   end
 
   # GET /foreign_nationals/1 or /foreign_nationals/1.json

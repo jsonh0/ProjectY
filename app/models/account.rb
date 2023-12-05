@@ -20,7 +20,10 @@ class Account < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "id", "name", "notes", "updated_at"]
+    ["id", "name", "notes"]
+  end
+  def self.ransackable_associations(auth_object = nil)
+    [ "foreign_nationals" ]
   end
 
 end

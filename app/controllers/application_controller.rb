@@ -11,20 +11,19 @@ class ApplicationController < ActionController::Base
   end
   
   def search
-    if params[:q].present? # Check if search parameters are present
+    @q = current_user.accounts.ransack(params[:q])
+    if params[:q].present? 
       if current_user.admin?
-        @q = Account.ransack(params[:q])
-        @accounts = @q.result
+        @q1 = Account.ransack(params[:q])
+        @q2 = ForeignNational.ransack(params[:q])
+        @results = @q1.result + @q2.result
       else
-        @accounts = current_user.accounts.ransack(params[:q])
+        @results = current_user.accounts.ransack(params[:q]).result
       end
-
       respond_to do |format|
         format.html { render 'accounts/search' }
         format.json { render json: @accounts }
       end
-    else
-      @q = current_user.accounts.ransack(params[:q])
     end
   end
   
