@@ -1,0 +1,38 @@
+
+<% if ImmigrationCase.statuses[immigration_case.status] >= 2 %>
+  <p>
+    <strong>
+      Sent Date: 
+    </strong>
+    <%= immigration_case.sent_date%>
+  </p>
+<% end %>
+<% if ImmigrationCase.statuses[immigration_case.status] >= 3 %>
+  <p>
+    <strong>
+      Received Date: 
+    </strong>
+    <%= immigration_case.received_date%>
+  </p>
+
+  <p>
+    <strong>
+      Receipt Number: 
+    </strong>
+    <%= immigration_case.receipt_number%>
+  </p>
+<% end %>
+<% if ImmigrationCase.statuses[immigration_case.status] == 5 %>
+  <p>
+    <strong>
+      Approval Date: 
+    </strong>
+    <%= immigration_case.approval_date%>
+  </p>
+  <p>
+    <strong>
+      Expiration Date: 
+    </strong>
+    <%= immigration_case.expiration_date%>
+  </p>
+<% end %>

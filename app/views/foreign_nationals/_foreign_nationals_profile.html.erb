@@ -18,5 +18,52 @@
     <strong>Address:</strong>
     <%= @foreign_national.address %>
   </p>
+  <hr>
+  <%@foreign_national.immigration_cases.each do |c|%>
+  <p>
+    <strong>
+      <span style="display: inline-block; margin-right: 10px;"><%=c.case_type%></span>
+      <span style="display: inline-block;"><%= c.status%></span>
+    </strong>
+   </p>
+    <% if ImmigrationCase.statuses[c.status] >= 2 %>
+      <p>
+        <strong>
+          Sent Date: 
+        </strong>
+        <%= c.sent_date%>
+      </p>
+    <% end %>
+    <% if ImmigrationCase.statuses[c.status] >= 3 %>
+      <p>
+        <strong>
+          Received Date: 
+        </strong>
+        <%= c.received_date%>
+      </p>
+
+      <p>
+        <strong>
+          Receipt Number: 
+        </strong>
+        <%= c.receipt_number%>
+      </p>
+    <% end %>
+    <% if ImmigrationCase.statuses[c.status] == 5 %>
+      <p>
+        <strong>
+          Approval Date: 
+        </strong>
+        <%= c.approval_date%>
+      </p>
+      <p>
+        <strong>
+          Expiration Date: 
+        </strong>
+        <%= c.expiration_date%>
+      </p>
+    <% end %>
+    <hr>
+  <% end %>
 
 </div>

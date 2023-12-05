@@ -7,21 +7,12 @@
       <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
       <label class="form-check-label" for="flexSwitchCheckDefault" id="toggleLabel">Toggle Profile</label>
     </div>
-    <hr>
+   
 
-    <div id="collapsible-content" class="collapse">
-      <!-- Content inside the collapsible element -->
-      <p>This is some collapsible content. It will be hidden or shown when the button is clicked.</p>
-    </div>
-
-    <div style="text-align: center; margin-top: 10px;">
-      <button class="btn btn-success" data-toggle="collapse" data-target="#collapsible-content">
-        <i class="fa-solid fa-angles-down"></i>
-      </button>
-    </div>
+  
     <!-- Docs-->
 
-    <div id="profile" class="page-content">
+    <div id="profile" class="page-content", style="margin-top: 20px;">
       
      <% if @documents.first != nil %>
       <%= render 'immigration_cases/document_view', document: @documents.first %>
@@ -29,10 +20,11 @@
 
     </div>
     <!-- Profile-->
-    <div id="cases" class="page-content" style="display: none;">
-      this will be a profile page!
+    <div id="cases" class="page-content" style="display: none; margin-top: 40px;">
+  
       <%=render "shared/status_bar", immigration_case: @immigration_case%>
-
+<hr>
+    <%=render "immigration_case_profile", immigration_case: @immigration_case%>
     </div>
   </div>
 </div>
