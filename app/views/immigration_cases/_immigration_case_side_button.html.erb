@@ -8,6 +8,8 @@
 
     <li><%= link_to "Add Receipt", "#", class: "dropdown-item", data: { toggle: "modal", target: "#AddReceipt"  } %></li>
 
+    <li><%= link_to "Mark as Approved", "#", class: "dropdown-item", data: { toggle: "modal", target: "#MarkAsApproved"  } %></li>
+
     <li><hr class="dropdown-divider"></li>
 
     <li>  <%= link_to "Edit this immigration case", edit_immigration_case_path(@immigration_case), class: "dropdown-item" %> </li>
@@ -15,6 +17,7 @@
     <li> <%= link_to "Back to Foreign National Page", foreign_national_path(@immigration_case.fn.id),  class: "dropdown-item" %></li>
 
     <li><hr class="dropdown-divider"></li>
+
     <li> 
      <%= button_to "Destroy this immigration case", @immigration_case, method: :delete , class: "dropdown-item", style: "color: #FD0404"%>
     
@@ -22,4 +25,3 @@
   </ul>
 
 </div>
-  

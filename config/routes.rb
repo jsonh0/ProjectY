@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :documents do
     post 'sent', on: :collection
     post 'add_receipt', on: :collection
+    post 'approved', on: :collection
   end
   resources :immigration_cases
   resources :foreign_nationals

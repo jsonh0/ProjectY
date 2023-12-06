@@ -73,6 +73,22 @@ class DocumentsController < ApplicationController
     end
   end
 
+  def approved
+    @document = Document.new(document_params)
+    respond_to do |format|
+      if  @document.save
+        @document.immigration_case.update(status: ImmigrationCase.statuses.keys[5])
+        @document.immigration_case.update(approval_date: params[:document][:immigration_case][:approval_date])
+        @document.immigration_case.update(expiration_date: params[:document][:immigration_case][:expiration_date])
+        format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), notice: "Document was successfully created. Added Receipt" }
+        format.json { render :show, status: :created, location: @document }
+      else
+        format.html { render redirect_to request.referer || foreign_national_url(params[immigration_case_id]), status: :unprocessable_entity }
+        format.json { render json: @document.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # PATCH/PUT /documents/1 or /documents/1.json
   def update
     respond_to do |format|
@@ -106,6 +122,6 @@ class DocumentsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def document_params
-    params.require(:document).permit(:immigration_case_id, :name, :image, :extracted_text, :uploader_id, immigration_case_attributes: [:sent_date])
+    params.require(:document).permit(:immigration_case_id, :name, :image, :extracted_text, :uploader_id, immigration_case_attributes: [:sent_date, :approval_date, :expiration_date])
   end
 end
