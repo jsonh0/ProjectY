@@ -60,12 +60,11 @@ class DocumentsController < ApplicationController
       if @document.extracted_text.blank?
         format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), status: :unprocessable_entity }
         format.json { render json: @document.errors, status: :unprocessable_entity }
-      elsif @document.name.blank? && @document.image.nil?
-        @document.immigration_case.update(status: ImmigrationCase.statuses.keys[3])
-        format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), notice: "Marked as Sent" }
       elsif @document.save
         @document.immigration_case.update(status: ImmigrationCase.statuses.keys[3])
-        format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), notice: "Document was successfully created. Marked as Sent" }
+        @document.immigration_case.update(received_date: params[:document][:immigration_case][:received_date])
+        @document.immigration_case.update(receipt_number: params[:document][:extracted_text])
+        format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), notice: "Document was successfully created. Added Receipt" }
         format.json { render :show, status: :created, location: @document }
       else
         format.html { render redirect_to request.referer || foreign_national_url(params[immigration_case_id]), status: :unprocessable_entity }

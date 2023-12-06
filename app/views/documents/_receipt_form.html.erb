@@ -29,9 +29,11 @@
 
   <%= form.hidden_field :uploader_id, value: current_user.id %>
 
-  <%= form.fields_for :immigration_case do |i_form| %>
-    <%= i_form.hidden_field :id, value: immigration_case_id %>
-    <%= i_form.hidden_field :status, value: 3%>
+  <%= form.fields_for :immigration_case, document.build_immigration_case do |immigration_case_form| %>
+    <div>
+      <%= immigration_case_form.label :received_date, "Received Date", style: "display: block" %>
+      <%= immigration_case_form.date_field :received_date %>
+    </div>
   <% end %>
 
   <div>
