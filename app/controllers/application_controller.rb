@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   end
   
   def search
-    @q = current_user.accounts.ransack(params[:q])
+    @q = Account.ransack(params[:q])
     if params[:q].present? 
       if current_user.admin?
         @q1 = Account.ransack(params[:q])

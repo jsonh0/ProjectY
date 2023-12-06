@@ -36,14 +36,15 @@ class DocumentsController < ApplicationController
 
   def sent
     @document = Document.new(document_params)
-    @document.build_immigration_case
+
     respond_to do |format|
       if @document.name.blank? && @document.image.nil?
         @document.immigration_case.update(status: ImmigrationCase.statuses.keys[2])
+        @document.immigration_case.update(sent_date: params[:document][:immigration_case][:sent_date])
         format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), notice: "Marked as Sent" }
       elsif @document.save
         @document.immigration_case.update(status: ImmigrationCase.statuses.keys[2])
-      
+        @document.immigration_case.update(sent_date: params[:document][:immigration_case][:sent_date])
         format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), notice: "Document was successfully created. Marked as Sent" }
         format.json { render :show, status: :created, location: @document }
       else
@@ -67,7 +68,7 @@ class DocumentsController < ApplicationController
         format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), notice: "Document was successfully created. Marked as Sent" }
         format.json { render :show, status: :created, location: @document }
       else
-        format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), status: :unprocessable_entity }
+        format.html { render redirect_to request.referer || foreign_national_url(params[immigration_case_id]), status: :unprocessable_entity }
         format.json { render json: @document.errors, status: :unprocessable_entity }
       end
     end
@@ -106,6 +107,6 @@ class DocumentsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def document_params
-    params.require(:document).permit(:immigration_case_id, :name, :image, :extracted_text, :uploader_id, immigration_case_attributes: [:status], immigration_case_attributes: [:sent_date])
+    params.require(:document).permit(:immigration_case_id, :name, :image, :extracted_text, :uploader_id, immigration_case_attributes: [:sent_date])
   end
 end
