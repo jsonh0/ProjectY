@@ -77,10 +77,18 @@ class DocumentsController < ApplicationController
     @document = Document.new(document_params)
     respond_to do |format|
       if  @document.save
+
         @document.immigration_case.update(status: ImmigrationCase.statuses.keys[5])
         @document.immigration_case.update(approval_date: params[:document][:immigration_case][:approval_date])
         @document.immigration_case.update(expiration_date: params[:document][:immigration_case][:expiration_date])
-        format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), notice: "Document was successfully created. Added Receipt" }
+        if @document.immigration_case.case_type == ImmigrationCase.case_types.keys[1]
+          @document.immigration_case.fn.update(status: ForeignNational.statuses.keys[3])
+        end
+        if @document.immigration_case.case_type == ImmigrationCase.case_types.keys[5]
+          @document.immigration_case.fn.update(status: ForeignNational.statuses.keys[4])
+        
+        end
+        format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), notice: "Document was successfully created. Case Approved" }
         format.json { render :show, status: :created, location: @document }
       else
         format.html { render redirect_to request.referer || foreign_national_url(params[immigration_case_id]), status: :unprocessable_entity }
