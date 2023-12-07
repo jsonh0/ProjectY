@@ -1,47 +1,42 @@
-<%= form_with(model: document, url: approved_documents_path, method: :post) do |form| %>
+<%= form_with(model: document, url: approved_documents_path, method: :post, class: "needs-validation", novalidate: true) do |form| %>
   <% if document.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(document.errors.count, "error") %> prohibited this document from being saved:</h2>
-
+    <div class="alert alert-danger" role="alert">
+      <h4 class="alert-heading">Validation Error!</h4>
       <ul>
-        <% document.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% document.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
   <%= form.hidden_field :immigration_case_id, value: immigration_case_id %>
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name, value: "Approval Notice" %>
+
+  <div class="mb-3">
+    <%= form.label :name, class: "form-label", style: "display: block" %>
+    <%= form.text_field :name, value: "Approval Notice", class: "form-control", required: true %>
   </div>
 
-  <div>
-    <%= form.label :image, style: "display: block" %>
-    <%= form.text_field :image %>
+  <div class="mb-3">
+    <%= form.label :image, class: "form-label", style: "display: block" %>
+    <%= form.text_field :image, class: "form-control" %>
   </div>
-
-  <!--<div>-->
-    <%#= form.label :extracted_text, "Receipt Number", style: "display: block" %>
-    <%#= form.text_field :extracted_text %>
-<!--  </div>-->
 
   <%= form.hidden_field :uploader_id, value: current_user.id %>
 
   <%= form.fields_for :immigration_case, document.build_immigration_case do |immigration_case_form| %>
-    <div>
-      <%= immigration_case_form.label :approval_date, "Approved Date", style: "display: block" %>
-      <%= immigration_case_form.date_field :approval_date %>
+    <div class="mb-3">
+      <%= immigration_case_form.label :approval_date, "Approved Date", class: "form-label", style: "display: block" %>
+      <%= immigration_case_form.date_field :approval_date, class: "form-control" %>
     </div>
 
-    <div>
-      <%= immigration_case_form.label :expiration_date, "Expiration Date", style: "display: block" %>
-      <%= immigration_case_form.date_field :expiration_date %>
+    <div class="mb-3">
+      <%= immigration_case_form.label :expiration_date, "Expiration Date", class: "form-label", style: "display: block" %>
+      <%= immigration_case_form.date_field :expiration_date, class: "form-control" %>
     </div>
   <% end %>
 
-  <div>
-    <%= form.submit %>
+  <div class="mb-3">
+    <%= form.submit "Save", class: "btn btn-primary" %>
   </div>
 <% end %>

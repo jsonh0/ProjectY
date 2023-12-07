@@ -1,46 +1,40 @@
-<%= form_with(model: foreign_national) do |form| %>
+<%= form_with(model: foreign_national, class: "needs-validation", novalidate: true) do |form| %>
   <% if foreign_national.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(foreign_national.errors.count, "error") %> prohibited this foreign_national from being saved:</h2>
-
+    <div class="alert alert-danger" role="alert">
+      <h4 class="alert-heading">Validation Error!</h4>
       <ul>
-        <% foreign_national.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% foreign_national.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="mb-3">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control", required: true %>
   </div>
 
-  <div>
-
-  <%= form.label :status, "Select status" %>
-  <%= form.collection_select :status, ForeignNational.statuses.keys, :to_s, :humanize, { include_blank: "Select a Status" } %>
-
+  <div class="mb-3">
+    <%= form.label :status, "Select Status", class: "form-label" %>
+    <%= form.select :status, ForeignNational.statuses.keys, { include_blank: "Select a Status" }, class: "form-select", required: true %>
   </div>
 
-  <div>
-    <%= form.label :birthday, style: "display: block" %>
-    <%= form.date_field :birthday %>
+  <div class="mb-3">
+    <%= form.label :birthday, class: "form-label" %>
+    <%= form.date_field :birthday, class: "form-control", required: true %>
   </div>
 
-  <div>
-    <%= form.label :address, style: "display: block" %>
-    <%= form.text_field :address %>
+  <div class="mb-3">
+    <%= form.label :address, class: "form-label" %>
+    <%= form.text_field :address, class: "form-control", required: true %>
   </div>
 
-  <div>
-
-      <%= form.hidden_field :account_id, value: @account_id %>
+  <div class="mb-3">
+    <%= form.hidden_field :account_id, value: @account_id %>
   </div>
 
-
-  <div>
-    <%= form.submit %>
+  <div class="mb-3">
+    <%= form.submit "Save", class: "btn btn-primary" %>
   </div>
-  
 <% end %>

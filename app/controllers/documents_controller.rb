@@ -77,7 +77,6 @@ class DocumentsController < ApplicationController
     @document = Document.new(document_params)
     respond_to do |format|
       if  @document.save
-
         @document.immigration_case.update(status: ImmigrationCase.statuses.keys[5])
         @document.immigration_case.update(approval_date: params[:document][:immigration_case][:approval_date])
         @document.immigration_case.update(expiration_date: params[:document][:immigration_case][:expiration_date])
