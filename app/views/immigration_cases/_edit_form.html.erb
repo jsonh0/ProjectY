@@ -1,6 +1,6 @@
-<%= form_with(model: immigration_case) do |form| %>
+<%= form_with(model: immigration_case, class: "needs-validation", novalidate: true) do |form| %>
   <% if immigration_case.errors.any? %>
-    <div style="color: red">
+    <div class="alert alert-danger" role="alert">
       <h2><%= pluralize(immigration_case.errors.count, "error") %> prohibited this immigration_case from being saved:</h2>
 
       <ul>
@@ -11,41 +11,41 @@
     </div>
   <% end %>
 
-  <div>
-     <%= form.hidden_field :foreign_nationals_id, value: immigration_case.foreign_nationals_id %>
-     <h5><%=immigration_case.foreign_nationals_id%></h5>
+  <div class="mb-3">
+    <%= form.hidden_field :foreign_nationals_id, value: immigration_case.foreign_nationals_id %>
   </div>
 
-  <div>
-    <%= form.label :case_type, style: "display: block" %>
-<%= form.collection_select :case_type, ImmigrationCase.case_types.keys, :to_s, :humanize, { include_blank: "Select a Case Type" } %>
+  <div class="mb-3">
+    <%= form.label :case_type, class: "form-label", style: "display: block" %>
+    <%= form.collection_select :case_type, ImmigrationCase.case_types.keys, :to_s, :humanize, { include_blank: "Select a Case Type" }, { class: "form-control", selected: immigration_case.case_type } %>
   </div>
 
-  <div>
-    <%= form.label :status, style: "display: block" %>
-<%= form.collection_select :status, ImmigrationCase.statuses.keys, :to_s, :humanize, { include_blank: "Select a Status" } %>
+  <div class="mb-3">
+    <%= form.label :status, class: "form-label", style: "display: block" %>
+    <%= form.collection_select :status, ImmigrationCase.statuses.keys, :to_s, :humanize, { include_blank: "Select a Status" }, { class: "form-control", selected: immigration_case.status } %>
   </div>
 
-  <div>
-    <%= form.label :receipt_number, style: "display: block" %>
-    <%= form.text_field :receipt_number %>
+  <div class="mb-3">
+    <%= form.label :receipt_number, class: "form-label", style: "display: block" %>
+    <%= form.text_field :receipt_number, class: "form-control", value: immigration_case.receipt_number %>
   </div>
 
-  <div>
-    <%= form.label :received_date, style: "display: block" %>
-    <%= form.date_field :received_date %>
-  </div>
- <div>
-    <%= form.label :sent_date, style: "display: block" %>
-    <%= form.date_field :sent_date %>
+  <div class="mb-3">
+    <%= form.label :received_date, class: "form-label", style: "display: block" %>
+    <%= form.date_field :received_date, class: "form-control", value: immigration_case.received_date %>
   </div>
 
-  <div>
-    <%= form.label :expiration_date, style: "display: block" %>
-    <%= form.date_field :expiration_date %>
+  <div class="mb-3">
+    <%= form.label :sent_date, class: "form-label", style: "display: block" %>
+    <%= form.date_field :sent_date, class: "form-control", value: immigration_case.sent_date %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="mb-3">
+    <%= form.label :expiration_date, class: "form-label", style: "display: block" %>
+    <%= form.date_field :expiration_date, class: "form-control", value: immigration_case.expiration_date %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.submit "Save", class: "btn btn-primary" %>
   </div>
 <% end %>
