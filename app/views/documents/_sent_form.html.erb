@@ -1,4 +1,4 @@
-<%= form_with(model: document, url: sent_documents_path, method: :post, class: "needs-validation", novalidate: true) do |form| %>
+<%= form_with(model: document, url: sent_documents_path, method: :post, class: "needs-validation", novalidate: true, multipart: true) do |form| %>
   <% if document.errors.any? %>
     <div class="alert alert-danger" role="alert">
       <h4 class="alert-heading">Validation Error!</h4>
@@ -19,7 +19,7 @@
 
   <div class="mb-3">
     <%= form.label :image, class: "form-label", style: "display: block" %>
-    <%= form.text_field :image, class: "form-control" %>
+    <%= form.file_field :image, class: "form-control" %>
   </div>
 
   <%= form.hidden_field :uploader_id, value: current_user.id %>
