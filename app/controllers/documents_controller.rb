@@ -34,6 +34,37 @@ class DocumentsController < ApplicationController
     end
   end
 
+
+  def extract_text
+    img = RTesseract.new(params[:image].tempfile.path)
+  
+    begin
+      text = img.to_s
+      #it just works#
+      receipt_number_match = text.match(/\n([A-Z]{3}.*?\d{5})\n/)
+      notice_date_match = text.match(/\nNOTICE DATE\n([A-Za-z]+\s\d{1,2},\s\d{4})\n/)
+  
+      if receipt_number_match
+        extracted_receipt_number = receipt_number_match[1].gsub(" ", "-")
+      else
+        extracted_receipt_number = "No match for receipt number."
+      end
+  
+      if notice_date_match
+        extracted_notice_date = notice_date_match[1]
+      else
+        extracted_notice_date = "No match for notice date."
+      end
+  
+    rescue StandardError => e
+      extracted_receipt_number = "Error extracting receipt number: #{e.message}"
+      extracted_notice_date = "Error extracting notice date: #{e.message}"
+    end
+  
+    render json: { receipt_number: extracted_receipt_number, notice_date: extracted_notice_date }
+  end
+  
+
   def sent
     @document = Document.new(document_params)
 
@@ -56,12 +87,9 @@ class DocumentsController < ApplicationController
 
   def add_receipt
     @document = Document.new(document_params)
-    if @document.image
-      img = RTesseract.new(@document.image.path)
-      img.to_s
-      1/0
-    end
-
+    img = RTesseract.new(@document.image.path)
+    txt = img.to_s
+    1/0
     respond_to do |format|
       if @document.extracted_text.blank?
         format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), status: :unprocessable_entity }
