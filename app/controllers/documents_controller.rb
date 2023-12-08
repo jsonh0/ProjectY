@@ -56,6 +56,12 @@ class DocumentsController < ApplicationController
 
   def add_receipt
     @document = Document.new(document_params)
+    if @document.image
+      img = RTesseract.new(@document.image.path)
+      img.to_s
+      1/0
+    end
+
     respond_to do |format|
       if @document.extracted_text.blank?
         format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), status: :unprocessable_entity }
