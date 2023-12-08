@@ -62,12 +62,13 @@
         processData: false,
         contentType: false,
         success: function (data) {
+          console.log("Data received from the server:", data);
           // Update the value of the extracted_text field
-          if (data.extracted_text) {
-            $("#document_extracted_text").val(data.extracted_text);
+          if (data.receipt_number) {
+            $("#document_extracted_text").val(data.receipt_number);
           } else {
-            console.log("No extracted_text in the data.");
-            // Handle missing extracted_text
+            console.log("No receipt_number in the data.");
+            // Handle missing receipt_number
           }
 
           // Update the value of the received_date field

@@ -52,6 +52,8 @@ class DocumentsController < ApplicationController
   
       if notice_date_match
         extracted_notice_date = notice_date_match[1]
+        extracted_notice_date = Date.strptime(extracted_notice_date, "%b %d, %Y")
+
       else
         extracted_notice_date = "No match for notice date."
       end
@@ -89,7 +91,7 @@ class DocumentsController < ApplicationController
     @document = Document.new(document_params)
     img = RTesseract.new(@document.image.path)
     txt = img.to_s
-    1/0
+
     respond_to do |format|
       if @document.extracted_text.blank?
         format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), status: :unprocessable_entity }
