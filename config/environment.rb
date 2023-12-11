@@ -6,4 +6,3 @@ require "carrierwave/orm/activerecord"
 # Initialize the Rails application.
 Rails.application.initialize!
 
-require_relative 'path/to/users_controller'
