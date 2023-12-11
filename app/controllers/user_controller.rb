@@ -1,5 +1,5 @@
 # app/controllers/users_controller.rb
-class UserController < ApplicationController
+class UserController < Devise::RegistrationsController
   before_action :authenticate_user! # Add this if you want to ensure users are authenticated for these actions
 
   def index
