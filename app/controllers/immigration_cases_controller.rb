@@ -59,10 +59,11 @@ class ImmigrationCasesController < ApplicationController
 
   # DELETE /immigration_cases/1 or /immigration_cases/1.json
   def destroy
+    @immigration_case.document.destroy_all
     @immigration_case.destroy
 
     respond_to do |format|
-      format.html { redirect_to immigration_cases_url, notice: "Immigration case was successfully destroyed." }
+      format.html { redirect_to foreign_national_url(@immigration_case.fn.id), notice: "Immigration case was successfully destroyed." }
       format.json { head :no_content }
     end
   end
