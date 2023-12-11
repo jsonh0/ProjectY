@@ -42,7 +42,7 @@ class DocumentsController < ApplicationController
       text = img.to_s
       #it just works#
       receipt_number_match = text.match(/\n([A-Z]{3}.*?\d{5})\n/)
-      notice_date_match = text.match(/\nNOTICE DATE\n([A-Za-z]+\s\d{1,2},\s\d{4})\n/)
+      notice_date_match = text.match(/\n([A-Za-z]+\s\d{1,2},\s\d{4})\n/)
   
       if receipt_number_match
         extracted_receipt_number = receipt_number_match[1].gsub(" ", "-")
@@ -91,7 +91,7 @@ class DocumentsController < ApplicationController
     @document = Document.new(document_params)
     img = RTesseract.new(@document.image.path)
     txt = img.to_s
-
+    
     respond_to do |format|
       if @document.extracted_text.blank?
         format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), status: :unprocessable_entity }
