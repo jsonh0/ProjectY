@@ -1,5 +1,5 @@
 # app/controllers/users_controller.rb
-class UsersController < Devise::ApplicationController
+class UsersController < Devise::RegistrationsController #ApplicationController
   def index
     @q = User.ransack(params[:q])
     @users = @q.result
