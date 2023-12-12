@@ -11,3 +11,5 @@ class UsersController < ApplicationController
     @user = User.find_by(username: params.fetch(:username))
   end
 end
+
+#when i deploy heroku and zeitwerk was asking for user_controller so i duplicated it 

@@ -34,7 +34,7 @@ class DocumentsController < ApplicationController
     end
   end
 
-
+#pull receipt and date if possible
   def extract_text
     img = RTesseract.new(params[:image].tempfile.path)
   
@@ -66,7 +66,7 @@ class DocumentsController < ApplicationController
     render json: { receipt_number: extracted_receipt_number, notice_date: extracted_notice_date }
   end
   
-
+#add sent document and change case status to sent
   def sent
     @document = Document.new(document_params)
 
@@ -87,6 +87,7 @@ class DocumentsController < ApplicationController
     end
   end
 
+  #add receipt document add receipt number and date then change status to received by gov
   def add_receipt
     @document = Document.new(document_params)
     #img = RTesseract.new(@document.image.path)
@@ -109,6 +110,7 @@ class DocumentsController < ApplicationController
     end
   end
 
+  #change case status to sent then upload doc and add dates
   def approved
     @document = Document.new(document_params)
     respond_to do |format|
@@ -158,7 +160,6 @@ class DocumentsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_document
     @document = Document.find(params[:id])
   end
