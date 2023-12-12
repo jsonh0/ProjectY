@@ -19,12 +19,12 @@
 
   <div class="mb-3">
     <%= form.label :image, class: "form-label", style: "display: block" %>
-    <%= form.file_field :image, class: "form-control" %>
+    <%= form.file_field :image, class: "form-control", id: "image-input" %>
   </div>
 
   <div class="mb-3">
     <%= form.label :extracted_text, "Receipt Number", class: "form-label", style: "display: block" %>
-    <%= form.text_field :extracted_text, class: "form-control" %>
+    <%= form.text_field :extracted_text, class: "form-control" , id: "document_extracted_text"%>
   </div>
 
   <%= form.hidden_field :uploader_id, value: current_user.id %>
@@ -32,7 +32,7 @@
   <%= form.fields_for :immigration_case, document.build_immigration_case do |immigration_case_form| %>
     <div class="mb-3">
       <%= immigration_case_form.label :received_date, "Received Date", class: "form-label", style: "display: block" %>
-      <%= immigration_case_form.date_field :received_date, class: "form-control" %>
+      <%= immigration_case_form.date_field :received_date, class: "form-control", id: "document_immigration_case_attributes_received_date" %>
     </div>
   <% end %>
 
@@ -40,3 +40,52 @@
     <%= form.submit "Save", class: "btn btn-primary" %>
   </div>
 <% end %>
+
+<script>
+  $(document).ready(function () {
+  // Add an event listener for the file input change event
+  $("#image-input").change(function () {
+    // Get the selected file
+    var file = this.files[0];
+
+    // Check if a file is selected
+    if (file) {
+      // Create a FormData object and append the file to it
+      var formData = new FormData();
+      formData.append('image', file);
+
+      // Make an AJAX request to your Rails controller action
+      $.ajax({
+        type: 'POST',
+        url: '/documents/extract_text', // Replace with your actual route
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (data) {
+          console.log("Data received from the server:", data);
+          // Update the value of the extracted_text field
+          if (data.receipt_number) {
+            $("#document_extracted_text").val(data.receipt_number);
+          } else {
+            console.log("No receipt_number in the data.");
+            // Handle missing receipt_number
+          }
+
+          // Update the value of the received_date field
+          if (data.notice_date) {
+            $("#document_immigration_case_attributes_received_date").val(data.notice_date);
+          } else {
+            console.log("No notice_date in the data.");
+            // Handle missing notice_date
+          }
+        },
+        error: function (error) {
+          console.error("Error:", error);
+          // Handle errors more explicitly if needed
+        }
+      });
+    }
+  });
+});
+
+</script>

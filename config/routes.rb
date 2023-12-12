@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     post 'sent', on: :collection
     post 'add_receipt', on: :collection
     post 'approved', on: :collection
+    post 'extract_text', on: :collection
+
   end
   resources :immigration_cases
   resources :foreign_nationals

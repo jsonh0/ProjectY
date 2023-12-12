@@ -10,7 +10,8 @@
       <!-- Cases page -->
       <div class="d-flex justify-content-between align-items-baseline">
         <h1><%= @foreign_national.name.capitalize() %>'s Cases</h1>
-
+        <!-- i know its cluttered... -->
+        <!-- But this modal toggles new_case modal in shared that loads an immigration case form-->
         <%= link_to "#", 
           data: { toggle: "modal", target: "#ImmigrationCaseModal#{@foreign_national.id}", fn: @foreign_national }, 
           class: "btn btn-light ms-2", 
