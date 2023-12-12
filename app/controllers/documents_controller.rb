@@ -89,8 +89,8 @@ class DocumentsController < ApplicationController
 
   def add_receipt
     @document = Document.new(document_params)
-    img = RTesseract.new(@document.image.path)
-    txt = img.to_s
+    #img = RTesseract.new(@document.image.path)
+    #txt = img.to_s
     
     respond_to do |format|
       if @document.extracted_text.blank?
