@@ -71,8 +71,9 @@ class ForeignNationalsController < ApplicationController
   
 
   # DELETE /foreign_nationals/1 or /foreign_nationals/1.json
-  def destroy
-    account_id @foreign_national.account_id
+  def destroy 
+    account_id = @foreign_national.account.id
+
     @foreign_national.immigration_cases.each do |immigration_case|
       immigration_case.document.each do |doc|
         doc.destroy
@@ -83,10 +84,10 @@ class ForeignNationalsController < ApplicationController
     end
     @foreign_national.destroy
     respond_to do |format|
-      format.html { redirect_to foreign_nationals_url, notice: "Foreign national was successfully destroyed." }
+      format.html { redirect_to account_path(account_id), notice: "Foreign national was successfully destroyed." }
       format.json { head :no_content }
     end
-    redirect_to account_path(account_id)
+    
   end
 
   private
