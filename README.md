@@ -16,4 +16,9 @@ USCIS almost only mails out paper documents. Dealing with 2-3 bins of mail per d
 
 
 
+## How to start
+
+* bin/dev for server
+* rails sample_data for sample data
+* Tested on codespace
 
