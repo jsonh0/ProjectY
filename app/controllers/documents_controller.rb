@@ -34,13 +34,16 @@ class DocumentsController < ApplicationController
     end
   end
 
+  # You probably want to move this OCR and text extraction logic to a service for maintainability/readability or even a method on your Document model
+  # https://www.toptal.com/ruby-on-rails/rails-service-objects-tutorial
+  # https://dev.37signals.com/vanilla-rails-is-plenty/
 #pull receipt and date if possible
   def extract_text
     img = RTesseract.new(params[:image].tempfile.path)
   
     begin
       text = img.to_s
-      #it just works#
+      #it just works™️#
       receipt_number_match = text.match(/\n([A-Z]{3}.*?\d{5})\n/)
       notice_date_match = text.match(/\n([A-Za-z]+\s\d{1,2},\s\d{4})\n/)
   
@@ -90,6 +93,7 @@ class DocumentsController < ApplicationController
   #add receipt document add receipt number and date then change status to received by gov
   def add_receipt
     @document = Document.new(document_params)
+    # delete commented out code
     #img = RTesseract.new(@document.image.path)
     #txt = img.to_s
     
@@ -115,6 +119,8 @@ class DocumentsController < ApplicationController
     @document = Document.new(document_params)
     respond_to do |format|
       if  @document.save
+        # this logic should be in the model or a service
+        ####
         @document.immigration_case.update(status: ImmigrationCase.statuses.keys[5])
         @document.immigration_case.update(approval_date: params[:document][:immigration_case][:approval_date])
         @document.immigration_case.update(expiration_date: params[:document][:immigration_case][:expiration_date])
@@ -123,8 +129,8 @@ class DocumentsController < ApplicationController
         end
         if @document.immigration_case.case_type == ImmigrationCase.case_types.keys[5]
           @document.immigration_case.fn.update(status: ForeignNational.statuses.keys[4])
-        
         end
+        #####
         format.html { redirect_to request.referer || foreign_national_url(params[immigration_case_id]), notice: "Document was successfully created. Case Approved" }
         format.json { render :show, status: :created, location: @document }
       else

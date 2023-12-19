@@ -9,7 +9,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :admin])
     devise_parameter_sanitizer.permit(:account_update, keys: [:username, :admin])
   end
-  
+
+  # seems like a weird place to put this since this is the parent of all your other controllers
   def search
     @q = Account.ransack(params[:q])
     if params[:q].present? 

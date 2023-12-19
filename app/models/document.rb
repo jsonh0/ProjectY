@@ -22,6 +22,7 @@
 #  fk_rails_...  (uploader_id => users.id)
 #
 class Document < ApplicationRecord
+  # delete commented out code
   #mount_uploader :image, ImageUploader
   mount_uploader :image, ImageUploader
 
