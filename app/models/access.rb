@@ -22,6 +22,9 @@ class Access < ApplicationRecord
   belongs_to :account, class_name: "Account", foreign_key: "account_id"
 
 
+  # might want to use strings so it's more readable in your database
+  # enum role: { admin: 'admin', foreign_national: 'foreign_national', legal: 'legal' }
+
   enum role: { admin: 0, foreign_national: 1, legal: 2 }
 
 

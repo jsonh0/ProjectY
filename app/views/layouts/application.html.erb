@@ -17,6 +17,7 @@
     
     <div class="container: pt-2">
 
+      <%# could put this in a partial %>
       <% if notice.present? %>
         <%= render partial: "shared/flash", locals: { message: notice, css_class: "success" } %>
       <% end %>
